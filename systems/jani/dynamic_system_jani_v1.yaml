@@ -1,0 +1,791 @@
+#YAML
+# start_date: 2000-01-19
+
+# SIM config
+
+# all estimates set to False in dynamic system
+use_forecast_weight_estimates: False
+use_forecast_div_mult_estimates: False
+use_instrument_weight_estimates: False
+use_instrument_div_mult_estimates: False
+use_forecast_scale_estimates: False
+
+# Trading rules
+# all rules from rob
+
+volatility_calculation:
+  func: "sysquant.estimators.vol.mixed_vol_calc"
+  days: 35
+  min_periods: 10
+  vol_abs_min: 0.0000000001
+  slow_vol_years: 20
+  proportion_of_slow_vol: 0.35
+  backfill: True
+#
+use_attenuation:
+   - 'breakout10'
+   - 'breakout20'
+   - 'breakout40'
+   - 'breakout80'
+   - 'breakout160'
+   - 'breakout320'
+   - 'relmomentum10'
+   - 'relmomentum20'
+   - 'relmomentum40'
+   - 'relmomentum80'
+   - 'mrinasset1000'
+   - 'assettrend2'
+   - 'assettrend4'
+   - 'assettrend8'
+   - 'assettrend16'
+   - 'assettrend32'
+   - 'assettrend64'
+   - 'normmom2'
+   - 'normmom4'
+   - 'normmom8'
+   - 'normmom16'
+   - 'normmom32'
+   - 'normmom64'
+   - 'momentum4'
+   - 'momentum8'
+   - 'momentum16'
+   - 'momentum32'
+   - 'momentum64'
+#
+trading_rules:
+  breakout10:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 10
+  breakout20:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 20
+  breakout40:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 40
+  breakout80:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 80
+  breakout160:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 160
+  breakout320:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 320
+  relmomentum10:
+     function: systems.provided.rules.rel_mom.relative_momentum
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+       horizon: 10
+  relmomentum20:
+     function: systems.provided.rules.rel_mom.relative_momentum
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+       horizon: 20
+  relmomentum40:
+     function: systems.provided.rules.rel_mom.relative_momentum
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+       horizon: 40
+  relmomentum80:
+     function: systems.provided.rules.rel_mom.relative_momentum
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+       horizon: 80
+  mrinasset1000:
+     function: systems.provided.rules.cs_mr.cross_sectional_mean_reversion
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+       horizon: 1000
+  carry10:
+     function: systems.provided.rules.carry.carry
+     data:
+         - "rawdata.raw_carry"
+     other_args:
+         smooth_days: 10
+  carry30:
+     function: systems.provided.rules.carry.carry
+     data:
+         - "rawdata.raw_carry"
+     other_args:
+         smooth_days: 30
+  carry60:
+     function: systems.provided.rules.carry.carry
+     data:
+         - "rawdata.raw_carry"
+     other_args:
+         smooth_days: 60
+  carry125:
+     function: systems.provided.rules.carry.carry
+     data:
+         - "rawdata.raw_carry"
+     other_args:
+         smooth_days: 125
+  assettrend2:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+         Lfast: 2
+         Lslow: 8
+  assettrend4:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+         Lfast: 4
+         Lslow: 16
+  assettrend8:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+         Lfast: 8
+         Lslow: 32
+  assettrend16:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+         Lfast: 16
+         Lslow: 64
+  assettrend32:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+         Lfast: 32
+         Lslow: 128
+  assettrend64:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+         Lfast: 64
+         Lslow: 256
+  normmom2:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+     other_args:
+         Lfast: 2
+         Lslow: 8
+  normmom4:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+     other_args:
+         Lfast: 4
+         Lslow: 16
+  normmom8:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+     other_args:
+         Lfast: 8
+         Lslow: 32
+  normmom16:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+     other_args:
+         Lfast: 16
+         Lslow: 64
+  normmom32:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+     other_args:
+         Lfast: 32
+         Lslow: 128
+  normmom64:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+     other_args:
+         Lfast: 64
+         Lslow: 256
+  momentum4:
+     function: systems.provided.rules.ewmac.ewmac
+     data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+     other_args:
+         Lfast: 4
+         Lslow: 16
+  momentum8:
+     function: systems.provided.rules.ewmac.ewmac
+     data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+     other_args:
+         Lfast: 8
+         Lslow: 32
+  momentum16:
+     function: systems.provided.rules.ewmac.ewmac
+     data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+     other_args:
+         Lfast: 16
+         Lslow: 64
+  momentum32:
+     function: systems.provided.rules.ewmac.ewmac
+     data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+     other_args:
+         Lfast: 32
+         Lslow: 128
+  momentum64:
+     function: systems.provided.rules.ewmac.ewmac
+     data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+     other_args:
+         Lfast: 64
+         Lslow: 256
+  relcarry:
+     function: systems.provided.rules.carry.relative_carry
+     data:
+          - "rawdata.smoothed_carry"
+          - "rawdata.median_carry_for_asset_class"
+  skewabs365:
+     function: systems.provided.rules.factors.factor_trading_rule
+     data:
+          - 'rawdata.get_demeanded_factor_value'
+     other_args:
+          smooth: 90
+          _factor_name: 'neg_skew'
+          _demean_method: 'historic_average_factor_value_all_assets'
+          _lookback_days: 365
+  skewabs180:
+     function: systems.provided.rules.factors.factor_trading_rule
+     data:
+          - 'rawdata.get_demeanded_factor_value'
+     other_args:
+          smooth: 45
+          _factor_name: 'neg_skew'
+          _demean_method: 'historic_average_factor_value_all_assets'
+          _lookback_days: 180
+  skewrv365:
+     function: systems.provided.rules.factors.factor_trading_rule
+     data:
+          - 'rawdata.get_demeanded_factor_value'
+     other_args:
+          smooth: 90
+          _factor_name: 'neg_skew'
+          _demean_method: 'average_factor_value_in_asset_class_for_instrument'
+          _lookback_days: 365
+  skewrv180:
+     function: systems.provided.rules.factors.factor_trading_rule
+     data:
+          - 'rawdata.get_demeanded_factor_value'
+     other_args:
+          smooth: 45
+          _factor_name: 'neg_skew'
+          _demean_method: 'average_factor_value_in_asset_class_for_instrument'
+          _lookback_days: 180
+  accel16:
+    function: systems.provided.rules.accel.accel
+    data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+    other_args:
+         Lfast: 16
+  accel32:
+    function: systems.provided.rules.accel.accel
+    data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+    other_args:
+         Lfast: 32
+  accel64:
+    function: systems.provided.rules.accel.accel
+    data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+    other_args:
+         Lfast: 64
+#
+forecast_cap: 20.0
+
+# from rob
+# okay to use rob's scalars if also all rob's rules
+forecast_scalars:
+  accel16: 7.8170710605387095
+  accel32: 5.563487137713779
+  accel64: 3.896720541225276
+  assettrend16: 3.549452858682833
+  assettrend2: 10.846520114531351
+  assettrend32: 2.3449234496490723
+  assettrend4: 7.572334583056326
+  assettrend64: 1.5465144366886119
+  assettrend8: 5.190470936448635
+  breakout10: 0.6031025130185256
+  breakout160: 0.7388310187414805
+  breakout20: 0.6742627921625178
+  breakout320: 0.7366197028421859
+  breakout40: 0.7036929411910525
+  breakout80: 0.726260784624834
+  carry10: 27.815707053556984
+  carry125: 29.366474500729886
+  carry30: 28.384062881349813
+  carry60: 28.40072429176199
+  momentum16: 4.104172020369661
+  momentum32: 2.786994330124792
+  momentum4: 8.539940954709955
+  momentum64: 1.9093945630747895
+  momentum8: 5.949404365193165
+  mrinasset1000: 653.253194
+  normmom16: 4.116536590599602
+  normmom2: 12.388305650778637
+  normmom32: 2.758872936017786
+  normmom4: 8.614429965006694
+  normmom64: 1.8706800701120874
+  normmom8: 5.979138542342214
+  relcarry: 49.44179741391023
+  relmomentum10: 61.24026078373817
+  relmomentum20: 86.50746400987076
+  relmomentum40: 117.77937298659975
+  relmomentum80: 159.87802982511536
+  skewabs180: 4.590246757939031
+  skewabs365: 2.351483885205172
+  skewrv180: 5.244752769697409
+  skewrv365: 3.002222097593425
+
+#
+percentage_vol_target: 25.0
+
+# initial capital 08-2024, do not change ever!
+notional_trading_capital: 76000
+
+base_currency: "EUR"
+#
+# Portfolio creation
+#
+instrument_div_multiplier: 2.5
+
+# https://qoppac.blogspot.com/2022/02/exogenous-risk-overlay-take-two.html
+# default
+#risk_overlay:
+#  max_risk_fraction_normal_risk: 1.75
+#  max_risk_fraction_stdev_risk: 4.0
+#  max_risk_limit_sum_abs_risk: 4.0
+#  max_risk_leverage: 20.0
+#
+# target 25% Rob
+risk_overlay:
+  max_risk_fraction_normal_risk: 1.4
+  max_risk_fraction_stdev_risk: 3.6
+  max_risk_limit_sum_abs_risk: 3.4
+  max_risk_leverage: 13
+
+# hierarchical instrument weights
+# https://github.com/robcarver17/pysystemtrade/issues/1162
+instrument_weights:
+  auto_weight_from_grouping:
+    parameters:
+      use_approx_DM: True
+    groups:
+      Agricultural:
+        weight: 0.143
+        grain:
+          weight: 0.5
+          canola:
+            weight: 0.333
+            CANOLA: 1.0
+          rice:
+            weight: 0.333
+            RICE: 1.0
+          soy:
+            weight: 0.333
+            SOYBEAN_mini: 0.5
+            SOYMEAL: 0.5
+        softs:
+          weight: 0.5
+          cotton:
+            weight: 0.5
+            COTTON2: 1.0
+          milk:
+            weight: 0.5
+            MILK: 1.0
+      Currencies:
+        weight: 0.143
+        cross:
+          weight: 0.3333
+          YENEUR: 1.0
+        developed:
+          weight: 0.3333
+          AUD: 0.25
+          NZD: 0.25
+          NOK: 0.25
+          SEK: 0.25
+        em:
+          weight: 0.333
+          MXP: 0.5
+          ZAR: 0.5
+      Energy:
+        weight: 0.143
+        gas:
+          weight: 0.333
+          GAS_US_mini: 0.5
+          GAS-PEN: 0.5
+        oil:
+          weight: 0.333
+          CRUDE_W_micro: 1.0
+        products:
+          weight: 0.333
+          GASOILINE: 0.5
+          HEATOIL: 0.5
+      Equity:
+        weight: 0.143
+        Asia:
+          weight: 0.25
+          japan:
+            weight: 1.0
+            NIKKEI: 0.5
+            NIKKEI400: 0.5
+        EM:
+          weight: 0.25
+          china:
+            weight: 1.0
+            FTSECHINAA: 0.5
+            HANG_mini: 0.5
+        EMEA:
+          weight: 0.25
+          german:
+            weight: 0.25
+            DAX: 1.0
+          eu:
+            weight: 0.25
+            index:
+              weight: 1.0
+              smallcap:
+                weight: 1.0
+                DJSTX-SMALL: 1.0
+          france:
+            weight: 0.25
+            CAC: 1.0
+          netherlands:
+            weight: 0.25
+            AEX: 1.0
+        World:
+          weight: 0.25
+          MSCIEAFA: 1.0
+      InterestRates:
+        weight: 0.143
+        Americas:
+          weight: 0.4
+          govvie:
+            weight: 0.8
+            US2: 0.5
+            CAD10: 0.5
+          stir:
+            weight: 0.2
+            SOFR: 1.0
+        Asia:
+          weight: 0.2
+          korea:
+            weight: 1.0
+            KR3: 0.5
+            KR10: 0.5
+        EMEA:
+          weight: 0.4
+          german:
+            weight: 0.5
+            BOBL: 0.5
+            SHATZ: 0.5
+          france:
+            weight: 0.5
+            OAT: 1.0
+      Metals:
+        weight: 0.143
+        precious:
+          weight: 1.0
+          PALLAD: 0.333
+          PLAT: 0.333
+          SILVER: 0.333
+      Volatility:
+        weight: 0.143
+        VIX_mini: 1.0
+
+
+# depends on instruments used
+forecast_weights:
+
+
+# depends on instruments used
+forecast_div_multiplier:
+
+
+# https://github.com/robcarver17/reports/blob/master/Duplicate_markets_report
+duplicate_instruments:
+  include:
+    aex: 'AEX'
+    aud: 'AUD'
+    jpy: 'JPY'
+    russel: 'RUSSELL'
+    eu-health: 'EU-HEALTH'
+    eu-finance: 'EU-FINANCE'
+    eu-oil: 'EU-OIL'
+    eu-tech: 'EU-TECH'
+    eu-utils: 'EU-UTILS'
+    eu-realestate: 'EU-REALESTATE'
+    eu-insure: 'EU-INSURE'
+    eurostx: 'EUROSTX'
+    cnh: 'CNH'
+    gasoiline: 'GASOILINE'
+    wheat: 'WHEAT'
+    hang: 'HANG_mini'
+    sp500: 'SP500_micro'
+    jgb: 'JGB'
+    euribor: 'EURIBOR-ICE'
+    kospi: 'KOSPI_mini'
+    ibex: 'IBEX_mini'
+    sgd: 'SGD'
+    nasdaq: 'NASDAQ_micro'
+    gas: 'GAS_US_mini'
+    soybean: 'SOYBEAN_mini'
+    copper: 'COPPER-micro'
+    eur: 'EUR_micro'
+    corn: 'CORN'
+    dow: 'DOW'
+    ethereum: 'ETHEREUM'
+    chf: 'CHF'
+    gold: 'GOLD_micro'
+    topix: 'NIKKEI400'
+    euro600: 'EURO600'
+    gbp: 'GBP'
+    silver: 'SILVER'
+    vix: 'VIX_mini'
+    crudew: 'CRUDE_W_micro'
+    hangent: 'HANGENT_mini'
+    aluminium: 'ALUMINIUM_LME'
+    krwusd: 'KRWUSD_mini'
+    nikkei: 'NIKKEI'
+    cad: 'CAD'
+    heatoil: 'HEATOIL-ICE'
+  exclude:
+    aex: 'AEX_mini'
+    aud: 'AUD_micro'
+    jpy: ['JPY_micro','JPY-SGX-TITAN', 'JPY-SGX']
+    russel: 'RUSSELL_mini'
+    eu-health: 'EU-DJ-HEALTH'
+    eu-finance: 'EU-DJ-FINANCE'
+    eu-oil: 'EU-DJ-OIL'
+    eu-tech: 'EU-DJ-TECH'
+    eu-realestate: 'EPRA-EUROPE'
+    eu-insure: 'EU-DJ-INSURE'
+    eurostx: 'EUROSTX-LARGE'
+    cnh: 'CNH-onshore'
+    gasoiline: ['GASOILINE_mini', 'GASOILINE_micro', 'GASOILINE_ICE']
+    wheat: 'WHEAT_mini'
+    hang: 'HANG'
+    sp500: 'SP500'
+    jgb: 'JGB-mini'
+    euribor: 'EURIBOR'
+    kospi: 'KOSPI'
+    ibex: 'IBEX'
+    sgd: 'SGD_mini'
+    nasdaq: 'NASDAQ'
+    gas: ['GAS_US', 'GAS-LAST']
+    soybean: 'SOYBEAN'
+    copper: ['COPPER','COPPER-mini']
+    eur: ['EUR', 'EUR_mini']
+    corn: 'CORN_mini'
+    eu-utils: 'EU-DJ-UTILS'
+    dow: 'DOW_mini'
+    ethereum: 'ETHER-micro'
+    chf: 'CHF_micro'
+    gold: ['GOLD', 'GOLD-mini']
+    topix: 'TOPIX'
+    euro600: 'EUROSTX200-LARGE'
+    gbp: 'GBP_micro'
+    silver: 'SILVER_mini'
+    vix: 'VIX'
+    crudew: ['CRUDE_W_mini', 'CRUDE_W']
+    hangent: 'HANGENT'
+    aluminium: 'ALUMINIUM'
+    krwusd: 'KRWUSD'
+    nikkei: 'NIKKEI-JPY'
+    cad: 'CAD_micro'
+    heatoil: ['HEATOIL_mini', 'HEATOIL']
+
+# Excluded instruments
+exclude_instrument_lists:
+
+  # ignore_instruments are ignored in backtests
+  # we still collect price data for them in production, do rolls etc
+  # You can override this by modifying the backtest config .yaml file used in either sim or production
+  # If you want to ignore because a duplicate market, use duplicate_instruments
+  # If you want to include in sim data, but not actually trade, use trading_restrictions
+  #
+  # BEST FOR INSTRUMENTS THAT LOOK EXPENSIVE, BUT WHERE WE HAVEN'T GOT ACCURATE DATA YET
+  #
+  # REVIEW REGULARLY AND CHECK THESE INSTRUMENTS AREN'T BETTER ELSEWHERE...
+  ignore_instruments:
+    # duplicate markets, without single good market
+    # where do these belong? duplicate_instruments or ignore_instruments or bad_markets?
+    - TWD
+    - TWD-mini
+    - INR
+    - INR-mini
+    - INR-SGX
+    - EU-RETAIL
+    - EU-DJ-RETAIL
+    - EU-CHEM
+    - EU-DJ-CHEM
+    - EU-FOOD
+    - EU-DJ-FOOD
+    - EU-MEDIA
+    - EU-DJ-MEDIA
+
+
+  # Here we put stuff we can't trade, but for which we still want to bring in prices in sim
+  # For the dynamically optimised strategy this list will be used in sim as 'don't trade'
+  # For static strategies, you will probably want to set these to zero instrument weights
+  # In production, things here will be added to the 'reduce_only' list of instruments
+  # NOTE: This will be regionally biased, you will probably want to override this in private_config.yaml
+  #
+  trading_restrictions:
+    - BITCOIN
+    - ETHEREUM
+
+  # These are markets that are too expensive or illiquid to actually trade
+  # For the dynamically optimised strategy this list will be used in sim as 'don't trade'
+  # For static strategies, you will probably want to set these to zero instrument weights
+  # In production, things here will be added to the 'reduce_only' list of instruments
+  # Run interactive controls to get a list of suggested markets here
+  # To override this list, change in sim .yaml config (sim) and private_config.yaml (production)
+
+  # https://github.com/robcarver17/reports/blob/master/Remove_markets_report
+  # Use the following if you want a clean slate without considering existing markets 
+  #
+  bad_markets:
+    - AEX_mini
+    - AUDJPY
+    - AUD_micro
+    - BB3M
+    - BBCOMM
+    - BOBL
+    - BONO
+    - BOVESPA
+    - BTP3
+    - BUTTER
+    - CAD
+    - CAD2
+    - CAD5
+    - CAD_micro
+    - CH10
+    - CHEESE
+    - CHFJPY
+    - CHF_micro
+    - CLP
+    - CNH
+    - CNH-onshore
+    - COAL
+    - COAL-GEORDIE
+    - COPPER-mini
+    - CORN_mini
+    - COTTON
+    - CZK
+    - EPRA-EUROPE
+    - ETHER-micro
+    - EU-CHEM
+    - EU-CONSTRUCTION
+    - EU-DJ-OIL
+    - EU-DJ-TELECOM
+    - EU-DJ-UTIL
+    - EU-FOOD
+    - EU-HOUSE
+    - EU-MEDIA
+    - EU-MID
+    - EU-RETAIL
+    - EU-TRAVEL
+    - EURAUD
+    - EURCAD
+    - EURIBOR
+    - EURIBOR-ICE
+    - EUROSTX-LARGE
+    - EUROSTX-SMALL
+    - EUROSTX200-LARGE
+    - FED
+    - FTSEINDO
+    - FTSEVIET
+    - GASOILINE_micro
+    - GBPCHF
+    - GBPEUR
+    - GBPJPY
+    - GBP_micro
+    - GICS
+    - HIGHYIELD
+    - HOUSE-US
+    - IG
+    - INR
+    - IRS
+    - JGB
+    - JGB-SGX-mini
+    - JGB-mini
+    - JP-REALESTATE
+    - JPY_mini
+    - KR10
+    - KR3
+    - KRWUSD
+    - MILKDRY
+    - MILKWET
+    - MSCIEMASIA
+    - OATIES
+    - OMX
+    - PLN
+    - RUR
+    - SARONA
+    - SGD
+    - SGD_mini
+    - SGX
+    - SHATZ
+    - SMI-MID
+    - SOFR
+    - SONIA3
+    - STEEL
+    - SUGAR16
+    - SWISSLEAD
+    - TIN_LME
+    - TWD
+    - TWD-mini
+    - US-PROPERTY
+    - US2
+    - US3
+    - US5
+    - VNKI
+    - WHEAT_ICE
+    - WHEAT_mini
+    - WHEY
+
