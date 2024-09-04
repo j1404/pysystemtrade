@@ -12,19 +12,21 @@ PYSYS_PRIVATE_CONFIG_DIR=/home/alpha/pst_private/prod
 #PYSYS_LOGGING_CONFIG=syslogging.logging_prod.yaml
 
 #0,15,30,45 * * * 1-7 export DISPLAY=:1 && /bin/bash /opt/ibc/gatewaystart.sh
-15 00  * * 1-5     source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-stack >> $ECHO_PATH/run_stack_handler.txt 2>&1; deactivate
-45 00  * * 1-5     source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-capital >> $ECHO_PATH/run_capital_update.txt 2>&1; deactivate
-05 07  * * 1-5     source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-prices >> $ECHO_PATH/run_daily_price_updates.txt 2>&1; deactivate
-05 07  * * 1-5     source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-fx >> $ECHO_PATH/run_daily_fx_and_contract_updates.txt 2>&1; deactivate
-00 23  * * 1-5     source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-multadj >> $ECHO_PATH/run_daily_update_multiple_adjusted_prices.txt 2>&1; deactivate
-30 20  * * 1-5     source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-systems >> $ECHO_PATH/run_systems.txt 2>&1; deactivate
-45 20  * * 1-5     source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-orders >> $ECHO_PATH/run_strategy_order_generator.txt 2>&1; deactivate
-00 21  * * 1-5     source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-clean >> $ECHO_PATH/run_cleaners.txt 2>&1; deactivate
-15 21  * * 1-5     source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-backup >> $ECHO_PATH/run_backups_echos.txt 2>&1; deactivate
-30 21  * * 1-5     source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-reports >> $ECHO_PATH/run_reports.txt 2>&1; deactivate
-# * * * * *        source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; echo "`date` `conda run -n py_310 python -VV`, $SCRIPT_PATH, $PYSYS_CODE, $ECHO_PATH" >> $ECHO_PATH/cron_test.txt 2>&1; deactivate
+
+15 00  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-stack >> $ECHO_PATH/run_stack_handler.txt 2>&1; deactivate
+45 00  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-capital >> $ECHO_PATH/run_capital_update.txt 2>&1; deactivate
+05 07  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-prices >> $ECHO_PATH/run_daily_price_updates.txt 2>&1; deactivate
+05 07  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-fx >> $ECHO_PATH/run_daily_fx_and_contract_updates.txt 2>&1; deactivate
+00 23  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-multadj >> $ECHO_PATH/run_daily_update_multiple_adjusted_prices.txt 2>&1; deactivate
+30 20  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-systems >> $ECHO_PATH/run_systems.txt 2>&1; deactivate
+45 20  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-orders >> $ECHO_PATH/run_strategy_order_generator.txt 2>&1; deactivate
+00 21  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-clean >> $ECHO_PATH/run_cleaners.txt 2>&1; deactivate
+15 21  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-backup >> $ECHO_PATH/run_backups_echos.txt 2>&1; deactivate
+30 21  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-reports >> $ECHO_PATH/run_reports.txt 2>&1; deactivate
+
+# * * * * *        source $PYSYS_CODE/venv/3.10.12/bin/activate; echo "`date` `conda run -n py_310 python -VV`, $SCRIPT_PATH, $PYSYS_CODE, $ECHO_PATH" >> $ECHO_PATH/cron_test.txt 2>&1; deactivate
 #
-@reboot             source /home/alpha/pysystemtrade/venv/3.10.12/bin/activate; pst-startup 2>&1; deactivate
+@reboot            source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-startup 2>&1; deactivate
 
 # 00:15 run_stack_handler
 # 00:45 run_capital_update
@@ -36,4 +38,7 @@ PYSYS_PRIVATE_CONFIG_DIR=/home/alpha/pst_private/prod
 # 21:00 run_cleaners
 # 21:15 run_backups
 # 21:30 run_reports
+
+# backup
+50 23 * * *        /home/alpha/backup.sh
 
