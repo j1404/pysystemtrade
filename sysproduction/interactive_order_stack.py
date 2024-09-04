@@ -243,7 +243,7 @@ def get_broker_order_details_for_balance_trade(data: dataBlob) -> brokerOrder:
         "Commission", type_expected=float, allow_default=True, default_value=0.0
     )
 
-    strategy_name = get_valid_strategy_name_from_user(data=data, source="positions")
+    strategy_name = get_valid_strategy_name_from_user(data=data, source="optimal_positions")
 
     data_broker = dataBroker(data)
     default_account = data_broker.get_broker_account()
