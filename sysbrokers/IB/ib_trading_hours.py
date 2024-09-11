@@ -130,6 +130,7 @@ def get_time_difference(time_zone_id: str) -> int:
         "US/Central": 6,
         "GB-Eire": 0,
         "Hongkong": -8,
+        "HongKong": -8,
         "Australia/NSW": -11,
         "": 0,
     }
