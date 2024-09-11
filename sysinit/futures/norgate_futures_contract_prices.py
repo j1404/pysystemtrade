@@ -21,7 +21,7 @@ NORGATE_CONFIG = ConfigCsvFuturesPrices(
     input_date_index_name="Date",
     input_skiprows=0,
     input_skipfooter=0,
-    input_date_format="%Y%m%d",
+    input_date_format="%Y-%m-%d",
     input_column_mapping=dict(
         OPEN="Open", HIGH="High", LOW="Low", FINAL="Close", VOLUME="Volume"
     ),
@@ -73,9 +73,7 @@ def rename_files(pathname, norgate_instr_code=None, dry_run=True):
             instr_config = instr_config_src._get_instrument_data_without_checking(
                 instrument
             )
-            if isnan(instr_config.meta_data.PerBlock) or isnan(
-                instr_config.meta_data.Slippage
-            ):
+            if isnan(instr_config.meta_data.PerBlock):
                 misconfigured.append(f"{identifier} ({instrument})")
                 continue
 
@@ -286,21 +284,21 @@ def build_import_config(instr):
 
 if __name__ == "__main__":
     input("Will overwrite existing prices are you sure?! CTL-C to abort")
-    # datapath = "/home/blah/pysystemtrade/data/Norgate/Futures"
-    # datapath = "/home/blah/pysystemtrade/data/Norgate/Future_conv"
-    datapath = resolve_path_and_filename_for_package(
-        get_production_config().get_element_or_arg_not_supplied("norgate_path")
-    )
+    datapath = "/home/alpha/data/norgate/Futures"
+    #datapath = "/home/alpha/data/norgate/Futures_conv"
+    #datapath = resolve_path_and_filename_for_package(
+    #    get_production_config().get_element_or_arg_not_supplied("norgate_path")
+    #)
 
     # rename/move files, just for one (Norgate style) instrument code. Operates in 'dry_run' mode by default
     # to actually do the rename, set dry_run=False
     # rename_files(datapath, "NKD")
-    # rename_files(datapath, "NKD", dry_run=False)
+    rename_files(datapath, "ES", dry_run=False)
 
     # rename/move all files. Operates in 'dry_run' mode by default
     # to actually do the rename, set dry_run=False
     # rename_files(datapath)
     # rename_files(datapath, dry_run=False)
 
-    for instr in ["SP500"]:
-        transfer_norgate_prices_to_arctic_single(instr, datapath=datapath)
+#    for instr in ["SP500"]:
+#        transfer_norgate_prices_to_arctic_single(instr, datapath=datapath)
