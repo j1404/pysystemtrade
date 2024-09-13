@@ -91,6 +91,7 @@ def pd_readcsv(
     input_column_mapping: Union[dict, named_object] = arg_not_supplied,
     skiprows: int = 0,
     skipfooter: int = 0,
+    adjust_hours: int = 0,
 ) -> pd.DataFrame:
     """
     Reads a pandas data frame, with time index labelled
@@ -99,8 +100,10 @@ def pd_readcsv(
     :param filename: Filename with extension
     :param date_index_name: Column name of date index
     :param date_format: usual stfrtime format
+    :param fallback_date_format: usual stfrtime format
     :param input_column_mapping: If supplied remaps column names in .csv file
     :param skiprows, skipfooter: passed to pd.read_csv
+    :param adjust_hours: optional datetime index adjustment
 
     :returns: pd.DataFrame
 
@@ -111,11 +114,13 @@ def pd_readcsv(
     ## Add time index as index
     try:
         df = add_datetime_index(
-            df=df, date_index_name=date_index_name, date_format=date_format
+            df=df, date_index_name=date_index_name, date_format=date_format,
+            adjust_hours=adjust_hours
         )
     except:
         df = add_datetime_index(
-            df=df, date_index_name=date_index_name, date_format=fallback_date_format
+            df=df, date_index_name=date_index_name, date_format=fallback_date_format,
+            adjust_hours=adjust_hours
         )
 
     if input_column_mapping is not arg_not_supplied:
@@ -129,6 +134,7 @@ def add_datetime_index(
     date_index_name: str,
     date_format: str = DEFAULT_DATE_FORMAT_FOR_CSV,
     expected_length_of_date: int = EXPECTED_LENGTH_OF_DATE,
+    adjust_hours: int = 0,
 ) -> pd.DataFrame:
     date_index = df[date_index_name]
     date_index = date_index.astype(str)
@@ -138,6 +144,7 @@ def add_datetime_index(
 
     date_index = date_index.apply(left, n=expected_length_of_date)
     df.index = pd.to_datetime(date_index, format=date_format).values
+    df.index = df.index + pd.Timedelta(hours=adjust_hours)
     del df[date_index_name]
     df.index.name = None
 

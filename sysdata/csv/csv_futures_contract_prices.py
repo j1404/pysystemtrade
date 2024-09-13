@@ -21,7 +21,8 @@ class ConfigCsvFuturesPrices:
     input_skiprows: int = 0
     input_skipfooter: int = 0
     apply_multiplier: float = 1.0
-    apply_inverse: bool = False
+    apply_inverse: bool = False,
+    adjust_hours: int = 0,
 
 
 class csvFuturesContractPriceData(futuresContractPriceData):
@@ -78,6 +79,7 @@ class csvFuturesContractPriceData(futuresContractPriceData):
         skipfooter = config.input_skipfooter
         multiplier = config.apply_multiplier
         inverse = config.apply_inverse
+        adjust_hours = config.adjust_hours
 
         try:
             instrpricedata = pd_readcsv(
@@ -87,6 +89,7 @@ class csvFuturesContractPriceData(futuresContractPriceData):
                 input_column_mapping=input_column_mapping,
                 skiprows=skiprows,
                 skipfooter=skipfooter,
+                adjust_hours=adjust_hours,
             )
         except OSError:
             self.log.warning(
