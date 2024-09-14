@@ -114,13 +114,17 @@ def pd_readcsv(
     ## Add time index as index
     try:
         df = add_datetime_index(
-            df=df, date_index_name=date_index_name, date_format=date_format,
-            adjust_hours=adjust_hours
+            df=df,
+            date_index_name=date_index_name,
+            date_format=date_format,
+            adjust_hours=adjust_hours,
         )
     except:
         df = add_datetime_index(
-            df=df, date_index_name=date_index_name, date_format=fallback_date_format,
-            adjust_hours=adjust_hours
+            df=df,
+            date_index_name=date_index_name,
+            date_format=fallback_date_format,
+            adjust_hours=adjust_hours,
         )
 
     if input_column_mapping is not arg_not_supplied:
@@ -144,7 +148,8 @@ def add_datetime_index(
 
     date_index = date_index.apply(left, n=expected_length_of_date)
     df.index = pd.to_datetime(date_index, format=date_format).values
-    df.index = df.index + pd.Timedelta(hours=adjust_hours)
+    if adjust_hours != 0:
+        df.index = df.index + pd.Timedelta(hours=adjust_hours)
     del df[date_index_name]
     df.index.name = None
 
