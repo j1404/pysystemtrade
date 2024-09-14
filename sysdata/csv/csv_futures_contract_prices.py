@@ -21,8 +21,8 @@ class ConfigCsvFuturesPrices:
     input_skiprows: int = 0
     input_skipfooter: int = 0
     apply_multiplier: float = 1.0
-    apply_inverse: bool = False,
-    adjust_hours: int = 0,
+    apply_inverse: bool = False
+    adjust_hours: int = 0
 
 
 class csvFuturesContractPriceData(futuresContractPriceData):
