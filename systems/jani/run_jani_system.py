@@ -18,7 +18,6 @@ from systems.forecasting import Rules
 from systems.portfolio import Portfolios
 from systems.positionsizing import PositionSizing
 
-# from systems.rawdata import RawData
 from systems.provided.rob_system.rawdata import myFuturesRawData
 
 # CONFIG = "systems.jani.dynamic_system_jani_v1.yaml"
