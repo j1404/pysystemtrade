@@ -1,5 +1,4 @@
 import os
-from numpy import isnan
 
 from syscore.dateutils import month_from_contract_letter
 from syscore.fileutils import (
@@ -7,7 +6,6 @@ from syscore.fileutils import (
     get_resolved_pathname,
 )
 from syscore.dateutils import MIXED_FREQ, HOURLY_FREQ, DAILY_PRICE_FREQ
-from syscore.fileutils import resolve_path_and_filename_for_package
 from syscore.pandas.pdutils import DEFAULT_DATE_FORMAT_FOR_CSV
 from sysdata.config.production_config import get_production_config
 from sysdata.csv.csv_futures_contract_prices import ConfigCsvFuturesPrices
@@ -31,12 +29,11 @@ NORGATE_CONFIG = ConfigCsvFuturesPrices(
     input_date_index_name="Date",
     input_skiprows=0,
     input_skipfooter=0,
-    #input_date_format="%Y-%m-%d",
-    input_date_format=DEFAULT_DATE_FORMAT_FOR_CSV,
+    input_date_format="%Y-%m-%d",
     input_column_mapping=dict(
         OPEN="Open", HIGH="High", LOW="Low", FINAL="Close", VOLUME="Volume"
     ),
-    adjust_hours=-1,
+    adjust_hours=23,
 )
 
 
@@ -83,9 +80,7 @@ def rename_files(pathname, norgate_instr_code=None, dry_run=True):
             instrument = market_map[identifier]
 
             try:
-                instr_config_src._get_instrument_data_without_checking(
-                    instrument
-                )
+                instr_config_src._get_instrument_data_without_checking(instrument)
             except:
                 misconfigured.append(f"{identifier} ({instrument})")
 
@@ -108,10 +103,18 @@ def rename_files(pathname, norgate_instr_code=None, dry_run=True):
         else:
             unmapped.append(identifier)
 
-    print(f"Successfully mapped: {dedupe_and_sort(mapped)}")
-    print(f"Unmapped: {dedupe_and_sort(unmapped)}")
-    print(f"Not properly configured in pysystemtrade: {dedupe_and_sort(misconfigured)}")
-    print(f"No roll config in pysystemtrade: {dedupe_and_sort(no_roll_config)}")
+    if len(mapped) == 0:
+        print(
+            f"No files named {norgate_instr_code}-*.csv "
+            f"found at '{resolved_pathname}'. Were the files already renamed?"
+        )
+    else:
+        print(f"Successfully mapped: {dedupe_and_sort(mapped)}")
+        print(f"Unmapped: {dedupe_and_sort(unmapped)}")
+        print(
+            f"Not properly configured in pysystemtrade: {dedupe_and_sort(misconfigured)}"
+        )
+        print(f"No roll config in pysystemtrade: {dedupe_and_sort(no_roll_config)}")
 
 
 def dedupe_and_sort(my_list):
@@ -190,7 +193,7 @@ market_map = {
     #'LFT9': 'XXX',
     "LLG": "GILT",
     "LRC": "ROBUSTA",
-    #"LSS": "STERLING3",
+    # "LSS": "STERLING3",
     "LSU": "SUGAR_WHITE",
     #'LWB': 'Feed wheat',
     #'MHI': 'Hang Seng Index - Mini',
@@ -224,7 +227,7 @@ market_map = {
     #'SO3': '3-Month SONIA',
     #'SP': 'XXXX',
     #'SP1': 'XXXX',
-    "SR3": 'SOFR',
+    "SR3": "SOFR",
     "SSG": "MSCISING",
     #'SSG4': 'XXXX',
     #'SXF': 'S&P/TSX 60 Index',
@@ -242,9 +245,9 @@ market_map = {
     #'YIR': 'ASX 90 Day Bank Accepted Bills',
     #'YIR4': 'XXXX',
     "YM": "DOW",
-    #"YXT": "AUS10",
+    # "YXT": "AUS10",
     #'YXT4': 'XXXX',
-    #"YYT": "AUS3",
+    # "YYT": "AUS3",
     #'YYT4': 'XXXX',
     "ZB": "US20",
     "ZC": "CORN",
@@ -288,17 +291,9 @@ def build_import_config(instr):
     else:
         multiplier = 1.0
 
-    return ConfigCsvFuturesPrices(
-        input_date_index_name="Date",
-        input_skiprows=0,
-        input_skipfooter=0,
-        #input_date_format="%Y-%m-%d",
-        input_date_format=DEFAULT_DATE_FORMAT_FOR_CSV,
-        input_column_mapping=dict(
-            OPEN="Open", HIGH="High", LOW="Low", FINAL="Close", VOLUME="Volume"
-        ),
-        apply_multiplier=multiplier,
-    )
+    config = NORGATE_CONFIG.apply_multiplier = multiplier
+
+    return config
 
 
 def check_prices_match(datapath, instr_code, contract_key):
@@ -310,34 +305,30 @@ def check_prices_match(datapath, instr_code, contract_key):
     contract = futuresContract(instr_code, contract_key)
 
     db_prices = db_prices.get_merged_prices_for_contract_object(contract)
-    print(f"Current parquet prices for {instr_code}, contract {contract_key}: \n{db_prices.tail()}")
-
-    csv_prices = csv_prices.get_prices_at_frequency_for_contract_object(contract, frequency=DAILY_PRICE_FREQ)
     print(
-        f"CSV prices for {instr_code}, contract {contract_key}: \n{csv_prices.tail()}")
+        f"Current parquet prices for {instr_code}, contract {contract_key}: \n{db_prices.tail()}"
+    )
 
-
+    csv_prices = csv_prices.get_prices_at_frequency_for_contract_object(
+        contract, frequency=DAILY_PRICE_FREQ
+    )
+    print(
+        f"CSV prices for {instr_code}, contract {contract_key}: \n{csv_prices.tail()}"
+    )
 
 
 if __name__ == "__main__":
-    #input("Will overwrite existing prices are you sure?! CTL-C to abort")
-    #datapath = "/home/alpha/data/norgate/Futures"
-    #datapath = "/home/alpha/data/norgate/Futures_conv"
-    datapath = resolve_path_and_filename_for_package(
-        get_production_config().get_element_or_arg_not_supplied("norgate_path")
+    norgate_path = get_production_config().get_element_or_arg_not_supplied(
+        "norgate_path"
     )
 
-    # rename/move files, just for one (Norgate style) instrument code. Operates in 'dry_run' mode by default
-    # to actually do the rename, set dry_run=False
-    # rename_files(datapath, "NKD")
-    #rename_files(datapath, "ES", dry_run=False)
+    # rename/move files, just for one (Norgate style) instrument code. Operates in
+    # 'dry_run' mode by default to actually do the rename, set dry_run=False
+    rename_files(f"{norgate_path}/Futures", "ES", dry_run=True)
 
-    # rename/move all files. Operates in 'dry_run' mode by default
-    # to actually do the rename, set dry_run=False
-    # rename_files(datapath)
-    # rename_files(datapath, dry_run=False)
+    # check_prices_match(f"{norgate_path}/Futures_conv", "SP500_micro", "20240900")
 
-    # check_prices_match(datapath, "SP500_micro", "20240900")
-
-    for instr in ["SP500_micro"]:
-       transfer_norgate_prices_to_db_single(instr, datapath=datapath)
+    # for instr in ["SP500_micro"]:
+    #     transfer_norgate_prices_to_db_single(
+    #         instr, datapath=f"{norgate_path}/Futures_conv"
+    #     )
