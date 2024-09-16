@@ -4,6 +4,7 @@ from syscore.pandas.frequency import merge_data_with_different_freq
 from sysdata.csv.csv_futures_contract_prices import csvFuturesContractPriceData
 from sysproduction.data.prices import diagPrices
 from sysobjects.contracts import futuresContract
+from sysobjects.dict_of_futures_per_contract_prices import dictFuturesContractPrices
 from sysobjects.futures_per_contract_prices import futuresContractPrices
 
 diag_prices = diagPrices()
@@ -171,9 +172,8 @@ def _get_prices_for_frequency(
         return db_prices.get_prices_at_frequency_for_contract_object(
             contract, frequency=frequency
         )
-    # else:
-    #     return csv_dict[contract.date_str]
-    return None
+    else:
+        return csv_dict[contract.date_str]
 
 
 if __name__ == "__main__":
