@@ -67,6 +67,12 @@ class _rollCalendarRow(dict):
             self["next_contract"] = next_contract
             self["carry_contract"] = carry_contract
 
+    def __repr__(self) -> str:
+        return (
+            f"{self[INDEX_NAME]},{self['current_contract']},{self['next_contract']},"
+            f"{self['carry_contract']}"
+        )
+
     @property
     def roll_date(self):
         return self[INDEX_NAME]
@@ -107,7 +113,7 @@ def _create_approx_calendar_from_earliest_contract(
 
         roll_calendar_as_list.append(new_row)
         current_contract = copy(next_contract)
-        print(current_contract)
+        # print(current_contract)
 
     roll_calendar = roll_calendar_as_list.to_pd_df()
 
@@ -525,11 +531,11 @@ def _print_adjustment_message(
     local_row_data: localRowData, adjusted_row: _rollCalendarRow
 ):
     print(
-        "Changed date from %s to %s for row with contracts %s"
+        "Changed date from %s to %s for '%s'"
         % (
             str(local_row_data.current_row.name),
             str(adjusted_row.roll_date),
-            str(adjusted_row.items()),
+            str(adjusted_row),
         )
     )
 
