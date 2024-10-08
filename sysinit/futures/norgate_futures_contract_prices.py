@@ -18,6 +18,7 @@ from sysinit.futures.contract_prices_from_csv_to_arctic import (
 )
 from sysinit.futures.contract_prices_from_split_freq_csv_to_db import (
     init_db_with_split_freq_csv_prices_for_code,
+    init_db_with_daily_csv_prices_for_contract,
 )
 from sysproduction.data.prices import diagPrices
 from sysobjects.contracts import futuresContract
@@ -278,6 +279,12 @@ norgate_multiplier_map = {
 def transfer_norgate_prices_to_db_single(instr, datapath):
     init_db_with_split_freq_csv_prices_for_code(
         instr, datapath, csv_config=NORGATE_CONFIG
+    )
+
+
+def transfer_norgate_prices_to_db_single_contract(instr, contract_date_str, datapath):
+    init_db_with_daily_csv_prices_for_contract(
+        instr, contract_date_str, datapath, csv_config=NORGATE_CONFIG
     )
 
 
