@@ -547,5 +547,22 @@ def backup_csv_dump(data):
     os.system("rsync -av %s %s" % (source_path, destination_path))
 
 
+def backup_arctic_to_parquet_single_instrument(instr_code):
+    data = get_data_blob("backup_arctic_to_parquet")
+    for instrument_code in [instr_code]:
+        backup_futures_contract_prices_for_instrument_to_parquet(
+            data=data, instrument_code=instrument_code
+        )
+
+
+def backup_arctic_to_parquet_single_contract(instr_code, date_str):
+    data = get_data_blob("backup_arctic_to_parquet")
+    contract = futuresContract(instr_code, date_str)
+    backup_futures_contract_prices_for_contract_to_parquet(
+        data=data,
+        futures_contract=contract,
+    )
+
+
 if __name__ == "__main__":
     backup_arctic_to_parquet()
