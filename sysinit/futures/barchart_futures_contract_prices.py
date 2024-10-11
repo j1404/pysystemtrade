@@ -7,7 +7,11 @@ from syscore.fileutils import (
 from syscore.dateutils import month_from_contract_letter
 
 from sysinit.futures.contract_prices_from_csv_to_arctic import (
-    init_arctic_with_csv_futures_contract_prices,
+    init_db_with_csv_futures_contract_prices,
+    init_db_with_csv_futures_contract_prices_for_code,
+)
+from sysinit.futures.contract_prices_from_split_freq_csv_to_db import (
+    init_db_with_csv_prices_for_contract_mixed,
 )
 
 
@@ -87,21 +91,31 @@ market_map = dict(
 )
 
 
-barchart_csv_config = ConfigCsvFuturesPrices(
+BARCHART_CONFIG = ConfigCsvFuturesPrices(
     input_date_index_name="Time",
     input_skiprows=0,
-    input_skipfooter=1,
-    input_date_format="%m/%d/%Y",
+    input_skipfooter=0,
+    input_date_format="%Y-%m-%dT%H:%M:%S",
     input_column_mapping=dict(
-        OPEN="Open", HIGH="High", LOW="Low", FINAL="Last", VOLUME="Volume"
+        OPEN="Open", HIGH="High", LOW="Low", FINAL="Close", VOLUME="Volume"
     ),
 )
 
 
-def transfer_barchart_prices_to_arctic(datapath):
+def transfer_barchart_prices_to_db(datapath):
     strip_file_names(datapath)
-    init_arctic_with_csv_futures_contract_prices(
-        datapath, csv_config=barchart_csv_config
+    init_db_with_csv_futures_contract_prices(datapath, csv_config=BARCHART_CONFIG)
+
+
+def transfer_barchart_prices_to_db_single(instr, datapath):
+    init_db_with_csv_futures_contract_prices_for_code(
+        instr, datapath, csv_config=BARCHART_CONFIG
+    )
+
+
+def transfer_barchart_prices_to_db_single_contract(instr, contract_str, datapath):
+    init_db_with_csv_prices_for_contract_mixed(
+        instr, contract_str, datapath, csv_config=BARCHART_CONFIG
     )
 
 
@@ -109,4 +123,4 @@ if __name__ == "__main__":
     input("Will overwrite existing prices are you sure?! CTL-C to abort")
     # modify flags as required
     datapath = "*** NEED TO DEFINE A DATAPATH ***"
-    transfer_barchart_prices_to_arctic(datapath)
+    transfer_barchart_prices_to_db(datapath)

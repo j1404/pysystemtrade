@@ -176,6 +176,32 @@ def init_db_with_daily_csv_prices_for_contract(
         )
 
 
+def init_db_with_csv_prices_for_contract_mixed(
+    instrument_code: str,
+    contract_date_str: str,
+    datapath: str,
+    csv_config=arg_not_supplied,
+    ignore_duplication: bool = True,
+):
+    print(f"Importing MIXED csv prices for {instrument_code}/{contract_date_str}")
+    csv_prices = csvFuturesContractPriceData(datapath, config=csv_config)
+
+    print(f"Getting MIXED .csv prices may take some time")
+    price_dict = csv_prices.get_prices_at_frequency_for_instrument(
+        instrument_code,
+        frequency=MIXED_FREQ,
+    )
+
+    contract = futuresContract(instrument_code, contract_date_str)
+    print(f"Contract object is {str(contract)}")
+
+    prices = price_dict[contract_date_str]
+    if len(prices):
+        write_prices_for_contract_at_frequency(
+            contract, prices, MIXED_FREQ, ignore_duplication=ignore_duplication
+        )
+
+
 def write_prices_for_contract_at_frequency(
     contract, prices, frequency, ignore_duplication=False
 ):
