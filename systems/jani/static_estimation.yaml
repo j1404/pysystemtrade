@@ -344,7 +344,7 @@ forecast_cap: 20.0
 # Capital correction
 #
 percentage_vol_target: 25.0
-notional_trading_capital: 80000
+notional_trading_capital: 76000
 base_currency: "EUR"
 
 #
@@ -358,13 +358,84 @@ base_currency: "EUR"
 #instrument_weights:
 
 instruments:
+  # Agricultural
+  - CANOLA
   - CORN
-  - EUR
-  - GOLD
+  - RICE
+  - SOYBEAN_mini
+  - SOYMEAL
+  - SOYOIL
+  - REDWHEAT
+  - FEEDCOW
+  - LIVECOW
+  - COCOA
+  - COFFEE
+  - COTTON2
+  - MILK
+  - OJ
+  #- SUGAR_WHITE # backtest crashes
+  - SUGAR11
+  # Currencies
+  - YENEUR
+  - CAD
+  - DX
+  - MXP
+  - AUD
+  - NZD
+  - CHF
+  - EUR_micro
+  - GBP
+  - NOK
+  - SEK
+  - ZAR
+  # Energy
+  - GAS_US_mini
+  - GAS-PEN
+  - CRUDE_W_micro
+  - GASOILINE
+  - HEATOIL
+  # Equity
+  - DOW
+  - NASDAQ_micro
+  - SP500_micro
+  - RUSSELL
+  - NIKKEI
+  - NIKKEI400
+  - FTSECHINAA
+  - HANG_mini
+  - KOSPI_mini
+  - SMI
+  - DAX
+  - EUROSTX
+  - DJSTX-SMALL
+  - CAC
+  - AEX
+  - MSCIEAFA
+  - FTSE100
+  # InterestRates
+  - SOFR
+  - CAD10
+  - US2
+  - US5
+  - US10
+  - US20
+  - KR3
+  - KR10
+  - BOBL
+  - BUND
+  - BUXL
+  - SHATZ
+  - OAT
+  - BTP
+  #- GILT # backtest crashes
+  # Metals
+  - BITCOIN
+  - GOLD_micro
   - PALLAD
-  - VIX
-  - WHEAT
-
+  - PLAT
+  - SILVER
+  # Volatility
+  - VIX_mini
 
 
 exclude_instrument_lists:
