@@ -59,7 +59,7 @@ def clone_prices_per_contract(
     list_of_contract_dates=None,
     ignore_duplication=False,
     inverse: bool = False,
-    multiplier: float = 1.0,
+    multiplier: float = 0.01,
     offset: float = 0.0,
 ):
     if list_of_contract_dates is None:
@@ -87,7 +87,7 @@ def clone_single_contract(
     contract_date: str,
     ignore_duplication=False,
     inverse: bool = False,
-    multiplier: float = 1.0,
+    multiplier: float = 0.01,
     offset: float = 0.0,
 ):
     futures_contract_from = futuresContract(instrument_from, contract_date)

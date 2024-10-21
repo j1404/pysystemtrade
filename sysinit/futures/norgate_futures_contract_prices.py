@@ -225,7 +225,7 @@ market_map = {
     "SJB": "JGB-mini",
     #'SNK': 'Nikkei 225 (SGX)',
     #'SNK4': 'XXXX',
-    #'SO3': '3-Month SONIA',
+    'SO3': '3-Month SONIA',
     #'SP': 'XXXX',
     #'SP1': 'XXXX',
     "SR3": "SOFR",
