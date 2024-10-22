@@ -91,6 +91,14 @@ def get_annualised_stdev_perc_of_instruments(data, instrument_list) -> stdevEsti
 
 
 def get_perc_returns_across_instruments(data, instrument_list: list) -> pd.DataFrame:
+    """
+    from pandas.core.indexes.datetimes import DatetimeIndex
+    for instr in instrument_list:
+        series = get_daily_perc_returns_for_risk(data, instr)
+        index_type = type(series.index)
+        if index_type is not DatetimeIndex:
+            print(f"{instr}: {index_type}") 
+    """
     perc_returns = dict(
         [
             (instrument_code, get_daily_perc_returns_for_risk(data, instrument_code))
