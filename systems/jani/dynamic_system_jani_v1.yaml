@@ -441,7 +441,8 @@ instrument_weights:
             REDWHEAT: 1.0
         index:
           weight: 0.25
-          GICS: 1.0
+          GICS: 0.5
+          BBCOMM: 0.5
         meats:
           weight: 0.25
           cows:
@@ -462,8 +463,11 @@ instrument_weights:
             COTTON2: 1.0
           milk:
             weight: 0.167
-            MILK: 0.5
-            WHEY: 0.5
+            BUTTER: 0.2
+            MILK: 0.2
+            MILKDRY: 0.2
+            MILKWET: 0.2
+            WHEY: 0.2
           oj:
             weight: 0.167
             OJ: 1.0
