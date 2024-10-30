@@ -473,7 +473,8 @@ instrument_weights:
             OJ: 1.0
           sugar:
             weight: 0.167
-            SUGAR11: 1.0
+            SUGAR11: 0.5
+            SUGAR_WHITE: 0.5
       Currencies:
         weight: 0.143
         cross:
@@ -565,19 +566,19 @@ instrument_weights:
                 EU-MID: 1.0
               smallcap:
                 weight: 0.333
-                DJSTX-SMALL: 0.5
-                EUROSTX-SMALL: 0.5
+                EUROSTX-SMALL: 1.0
             sector:
               weight: 0.4
-              EU-CHEM: 0.111
-              EU-CONSTRUCTION: 0.111
-              EU-DJ-TELECOM: 0.111
-              EU-DJ-UTIL: 0.111
-              EU-DJ-MEDIA: 0.111
-              EU-FOOD: 0.111
-              EU-HOUSE: 0.111
-              EU-INSURE: 0.111
-              EU-RETAIL: 0.111
+              EU-CHEM: 0.1
+              EU-CONSTRUCTION: 0.1
+              EU-DJ-TELECOM: 0.1
+              EU-DJ-UTIL: 0.1
+              EU-DJ-MEDIA: 0.1
+              EU-FOOD: 0.1
+              EU-HOUSE: 0.1
+              EU-INSURE: 0.1
+              EU-MEDIA: 0.1
+              EU-RETAIL: 0.1
           france:
             weight: 0.1666666667
             CAC: 1.0
