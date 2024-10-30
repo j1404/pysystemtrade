@@ -482,23 +482,25 @@ instrument_weights:
           YENEUR: 0.5
         developed:
           weight: 0.3333
-          AUD: 0.11111
-          CAD: 0.11111
-          CHF: 0.11111
-          DX: 0.11111
-          EUR_micro: 0.11111
-          GBP: 0.11111
-          NOK: 0.11111
-          NZD: 0.11111
-          SEK: 0.11111
+          AUD: 0.1
+          CAD: 0.1
+          CHF: 0.1
+          DX: 0.1
+          EUR_micro: 0.1
+          GBP: 0.1
+          NOK: 0.1
+          NZD: 0.1
+          SEK: 0.1
+          SGD: 0.1
         em:
           weight: 0.333
-          CLP: 0.16666667
-          CZK: 0.16666667
-          IRS: 0.16666667
-          MXP: 0.16666667
-          PLN: 0.16666667
-          ZAR: 0.16666667
+          CLP: 0.143
+          CZK: 0.143
+          IRS: 0.143
+          MXP: 0.143
+          PLN: 0.143
+          RUR: 0.143
+          ZAR: 0.143
       Energy:
         weight: 0.143
         gas:
@@ -541,8 +543,9 @@ instrument_weights:
           weight: 0.2
           china:
             weight: 0.5
-            FTSECHINAA: 0.5
-            HANG_mini: 0.5
+            FTSECHINAA: 0.333
+            HANGTECH: 0.333
+            HANG_mini: 0.333
           korea:
             weight: 0.5
             KOSPI_mini: 1.0
@@ -566,9 +569,15 @@ instrument_weights:
                 EUROSTX-SMALL: 0.5
             sector:
               weight: 0.4
-              EU-DJ-TELECOM: 0.333
-              EU-DJ-UTIL: 0.333
-              EU-DJ-MEDIA: 0.333
+              EU-CHEM: 0.111
+              EU-CONSTRUCTION: 0.111
+              EU-DJ-TELECOM: 0.111
+              EU-DJ-UTIL: 0.111
+              EU-DJ-MEDIA: 0.111
+              EU-FOOD: 0.111
+              EU-HOUSE: 0.111
+              EU-INSURE: 0.111
+              EU-RETAIL: 0.111
           france:
             weight: 0.1666666667
             CAC: 1.0
@@ -594,13 +603,14 @@ instrument_weights:
           weight: 0.4
           govvie:
             weight: 0.6
-            US2: 0.143
-            US5: 0.143
-            US10: 0.143
-            US10U: 0.143
-            US20: 0.143
-            US30: 0.143
-            CAD10: 0.143
+            US2: 0.125
+            US3: 0.125
+            US5: 0.125
+            US10: 0.125
+            US10U: 0.125
+            US20: 0.125
+            US30: 0.125
+            CAD10: 0.125
           stir:
             weight: 0.4
             SOFR: 0.5
@@ -657,8 +667,8 @@ instrument_weights:
           SILVER: 0.25
       Volatility:
         weight: 0.143
-        VIX_mini: 1.0
-
+        VIX_mini: 0.5
+        VNKI: 0.5
 
 
 # can calculated with systems/jani/static_estimation.yam & systems/jani/run_jani_system.py
