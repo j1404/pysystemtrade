@@ -8,7 +8,8 @@ from syscore.constants import arg_not_supplied
 from sysdata.csv.csv_adjusted_prices import csvFuturesAdjustedPricesData
 
 from sysobjects.adjusted_prices import futuresAdjustedPrices
-
+from sysproduction.data.prices import get_valid_instrument_code_from_user
+from sysproduction.update_multiple_adjusted_prices import ALL_INSTRUMENTS
 from sysproduction.data.prices import diagPrices
 
 diag_prices = diagPrices()
@@ -45,12 +46,12 @@ def process_adjusted_prices_single_instrument(
     ADD_TO_CSV=False,
 ):
     (
-        arctic_multiple_prices,
-        parquet_adjusted_prices,
+        db_multiple_prices,
+        db_adjusted_prices,
         csv_adjusted_prices,
     ) = _get_data_inputs(csv_adj_data_path)
     if multiple_prices is arg_not_supplied:
-        multiple_prices = arctic_multiple_prices.get_multiple_prices(instrument_code)
+        multiple_prices = db_multiple_prices.get_multiple_prices(instrument_code)
     adjusted_prices = futuresAdjustedPrices.stitch_multiple_prices(
         multiple_prices, forward_fill=True
     )
@@ -58,7 +59,7 @@ def process_adjusted_prices_single_instrument(
     print(adjusted_prices)
 
     if ADD_TO_DB:
-        parquet_adjusted_prices.add_adjusted_prices(
+        db_adjusted_prices.add_adjusted_prices(
             instrument_code, adjusted_prices, ignore_duplication=True
         )
     if ADD_TO_CSV:
@@ -71,7 +72,20 @@ def process_adjusted_prices_single_instrument(
 
 if __name__ == "__main__":
     input("Will overwrite existing prices are you sure?! CTL-C to abort")
-    # modify flags and datapath as required
-    process_adjusted_prices_all_instruments(
-        csv_adj_data_path=arg_not_supplied, ADD_TO_DB=True, ADD_TO_CSV=True
+    instrument_code = get_valid_instrument_code_from_user(
+        all_code=ALL_INSTRUMENTS, allow_all=True
     )
+
+    if instrument_code == ALL_INSTRUMENTS:
+        # modify flags and datapath as required
+        process_adjusted_prices_all_instruments(
+            ADD_TO_DB=True, ADD_TO_CSV=False, csv_adj_data_path=arg_not_supplied
+        )
+    else:
+        # modify flags and datapath as required
+        process_adjusted_prices_single_instrument(
+            instrument_code,
+            ADD_TO_DB=True,
+            ADD_TO_CSV=False,
+            csv_adj_data_path=arg_not_supplied,
+        )
