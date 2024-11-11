@@ -9,7 +9,8 @@ mapping_dict = dict(
 #    GOLD="GOLD_micro",
 #    KOSPI="KOSPI_mini",
 #    NASDAQ="NASDAQ_micro",
-    EUR="EUR_micro",
+#    EUR="EUR_micro",
+    COPPER="COPPER-micro",
 )
 
 
@@ -20,4 +21,5 @@ if __name__ == "__main__":
             instrument_from=instrument_from,
             instrument_to=instrument_to,
             write_to_csv=write_to_csv,
+            ignore_duplication=True,
         )
