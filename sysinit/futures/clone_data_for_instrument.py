@@ -59,7 +59,7 @@ def clone_prices_per_contract(
     list_of_contract_dates=None,
     ignore_duplication=False,
     inverse: bool = False,
-    multiplier: float = 0.01,
+    multiplier: float = 1.0,
     offset: float = 0.0,
 ):
     if list_of_contract_dates is None:
