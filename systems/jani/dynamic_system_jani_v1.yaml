@@ -423,22 +423,26 @@ instrument_weights:
         grain:
           weight: 0.25
           canola:
-            weight: 0.2
+            weight: 0.1667
             CANOLA: 1.0
           corn:
-            weight: 0.2
+            weight: 0.1667
             CORN: 1.0
+          oats:
+            weight: 0.1667
+            OATIES: 1.0
           rice:
-            weight: 0.2
+            weight: 0.1667
             RICE: 1.0
           soy:
-            weight: 0.2
+            weight: 0.1667
             SOYBEAN_mini: 0.333
             SOYMEAL: 0.333
             SOYOIL: 0.333
           wheat:
-            weight: 0.2
-            REDWHEAT: 1.0
+            weight: 0.1667
+            REDWHEAT: 0.5
+            WHEAT: 0.5
         index:
           weight: 0.25
           GICS: 0.5
@@ -483,16 +487,17 @@ instrument_weights:
           YENEUR: 0.5
         developed:
           weight: 0.3333
-          AUD: 0.1
-          CAD: 0.1
-          CHF: 0.1
-          DX: 0.1
-          EUR_micro: 0.1
-          GBP: 0.1
-          NOK: 0.1
-          NZD: 0.1
-          SEK: 0.1
-          SGD: 0.1
+          AUD: 0.0909
+          CAD: 0.0909
+          CHF: 0.0909
+          DX: 0.0909
+          EUR_micro: 0.0909
+          GBP: 0.0909
+          JPY_mini: 0.0909
+          NOK: 0.0909
+          NZD: 0.0909
+          SEK: 0.0909
+          SGD: 0.0909
         em:
           weight: 0.333
           CLP: 0.143
@@ -659,7 +664,8 @@ instrument_weights:
           BITCOIN: 1.0
         industrial:
           weight: 0.333
-          STEEL: 1.0
+          STEEL: 0.5
+          COPPER-micro: 0.5
         precious:
           weight: 0.333
           GOLD_micro: 0.25
