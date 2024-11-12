@@ -165,4 +165,3 @@ report_config_defaults = dict(
     account_curve_report=account_curve_report_config,
     commission_report=commission_report_config,
 )
-

@@ -11,19 +11,19 @@ from sysproduction.update_historical_prices import write_merged_prices_for_contr
 
 import sys
 
-#instrument_code = sys.argv[1]
-#instrument_code = 'SOYBEAN_mini'
-#list_of_contracts = ['202311']
+# instrument_code = sys.argv[1]
+# instrument_code = 'SOYBEAN_mini'
+# list_of_contracts = ['202311']
 
 list_of_contracts = []
-#list_of_contracts.append(sys.argv[2])
+# list_of_contracts.append(sys.argv[2])
 
 
 def seed_price_data_from_IB(instrument_code):
     data = dataBlob()
     data_broker = dataBroker(data)
 
-    #list_of_contracts = data_broker.get_list_of_contract_dates_for_instrument_code(
+    # list_of_contracts = data_broker.get_list_of_contract_dates_for_instrument_code(
     #    instrument_code, allow_expired=True)
 
     ## This returns yyyymmdd strings, where we have the actual expiry date
@@ -58,7 +58,6 @@ def seed_price_data_for_contract(data: dataBlob, contract_object: futuresContrac
 def seed_price_data_for_contract_at_frequency(
     data: dataBlob, contract_object: futuresContract, frequency: Frequency
 ):
-
     data_broker = dataBroker(data)
     update_prices = updatePrices(data)
     log = contract_object.specific_log(data.log)
@@ -84,7 +83,6 @@ def seed_price_data_for_contract_at_frequency(
 
 
 if __name__ == "__main__":
-
     print("Get initial price data from IB")
     instrument_code = input("Instrument code? <return to abort> ")
     if instrument_code == "":

@@ -97,7 +97,7 @@ def get_perc_returns_across_instruments(data, instrument_list: list) -> pd.DataF
         series = get_daily_perc_returns_for_risk(data, instr)
         index_type = type(series.index)
         if index_type is not DatetimeIndex:
-            print(f"{instr}: {index_type}") 
+            print(f"{instr}: {index_type}")
     """
     perc_returns = dict(
         [
