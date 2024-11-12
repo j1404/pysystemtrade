@@ -97,6 +97,7 @@ def init_db_with_split_freq_csv_prices_for_code(
         write_prices_for_contract_at_frequency(
             contract, daily, DAILY_PRICE_FREQ, ignore_duplication=ignore_duplication
         )
+
         # if we already have hourly data in the db, get it and merge with daily
         if db_prices.has_price_data_for_contract_at_frequency(
             contract, frequency=HOURLY_FREQ
@@ -127,6 +128,7 @@ def init_db_with_split_freq_csv_prices_for_code(
         write_prices_for_contract_at_frequency(
             contract, hourly, HOURLY_FREQ, ignore_duplication=ignore_duplication
         )
+
         # if we already have daily data in the db, get it and merge with hourly
         if db_prices.has_price_data_for_contract_at_frequency(
             contract, frequency=DAILY_PRICE_FREQ

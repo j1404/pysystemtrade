@@ -1,5 +1,5 @@
 ## Expected slippage eg half bid-ask spread
-## Used to be in instrument config, now seperate
+## Used to be in instrument config, now separate
 import pandas as pd
 from sysdata.base_data import baseData
 from syslogging.logger import *
@@ -23,7 +23,6 @@ class spreadCostData(baseData):
 
     def get_spread_costs_as_series(self) -> pd.Series:
         raise NotImplementedError
-
 
     def _get_spread_cost_if_series_provided(self, instrument_code: str) -> float:
         all_data = self.get_spread_costs_as_series()

@@ -453,9 +453,11 @@ def backup_capital(data):
                 strategy_name
             )
         except missingData:
-            parquet_data = pd.Series(dtype=float)
-        if len(parquet_data) > len(strategy_capital_data):
-            data.log.warning("More parquet data, skipping")
+            parquet_data = []
+
+        if len(parquet_data) >= len(strategy_capital_data):
+            data.log.debug(f"No backup needed for '{strategy_name}', skipping")
+            continue
 
         data.parquet_capital.update_capital_pd_df_for_strategy(
             strategy_name=strategy_name, updated_capital_df=strategy_capital_data
