@@ -83,5 +83,8 @@ if __name__ == "__main__":
     else:
         # modify flags and datapath as required
         process_adjusted_prices_single_instrument(
-            instrument_code, ADD_TO_ARCTIC=True, ADD_TO_CSV=False, csv_adj_data_path=arg_not_supplied
+            instrument_code,
+            ADD_TO_ARCTIC=True,
+            ADD_TO_CSV=False,
+            csv_adj_data_path=arg_not_supplied,
         )
