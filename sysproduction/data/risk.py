@@ -92,7 +92,7 @@ def get_annualised_stdev_perc_of_instruments(data, instrument_list) -> stdevEsti
 
 
 def get_perc_returns_across_instruments(data, instrument_list: list) -> pd.DataFrame:
-    print("JANI: Checking daily percentage resturn series for all instruments...")
+    print("JANI: Checking daily percentage return series for all instruments...")
     for instr in instrument_list:
         series = get_daily_perc_returns_for_risk(data, instr)
         index_type = type(series.index)
