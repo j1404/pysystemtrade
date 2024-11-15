@@ -2,6 +2,7 @@ from copy import copy
 
 import numpy as np
 import pandas as pd
+from pandas.core.indexes.datetimes import DatetimeIndex
 
 from syscore.dateutils import ROOT_BDAYS_INYEAR, BUSINESS_DAYS_IN_YEAR
 from syscore.objects import resolve_function
@@ -91,14 +92,17 @@ def get_annualised_stdev_perc_of_instruments(data, instrument_list) -> stdevEsti
 
 
 def get_perc_returns_across_instruments(data, instrument_list: list) -> pd.DataFrame:
-    """
-    from pandas.core.indexes.datetimes import DatetimeIndex
+    print("JANI: Checking daily percentage resturn series for all instruments...")
     for instr in instrument_list:
         series = get_daily_perc_returns_for_risk(data, instr)
         index_type = type(series.index)
         if index_type is not DatetimeIndex:
-            print(f"{instr}: {index_type}")
-    """
+            print(
+                f"ERROR {instr} has an unexpected index type ({index_type}). "
+                f"You might be able to fix this by manually deleting the optimal "
+                f"position parquet file"
+            )
+
     perc_returns = dict(
         [
             (instrument_code, get_daily_perc_returns_for_risk(data, instrument_code))
