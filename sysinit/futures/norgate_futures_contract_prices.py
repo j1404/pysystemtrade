@@ -124,6 +124,9 @@ def dedupe_and_sort(my_list):
 
 
 market_map = {
+    "ETH": "ETHEREUM",
+    "HTW": "MSCITAIWAN",
+    "SO3": "SONIA3",
     "6A": "AUD",
     "6B": "GBP",
     "6C": "CAD",
@@ -331,7 +334,7 @@ if __name__ == "__main__":
 
     # rename/move files, just for one (Norgate style) instrument code. Operates in
     # 'dry_run' mode by default to actually do the rename, set dry_run=False
-    rename_files(f"{norgate_path}/Futures", "ES", dry_run=True)
+    rename_files(f"{norgate_path}/Futures", "SO3", dry_run=False)
 
     # check_prices_match(f"{norgate_path}/Futures_conv", "SP500_micro", "20240900")
 
