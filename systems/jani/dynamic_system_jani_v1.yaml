@@ -510,18 +510,21 @@ instrument_weights:
       Energy:
         weight: 0.143
         gas:
-          weight: 0.333
+          weight: 0.25
           GAS-LAST: 0.333
           GAS_US_mini: 0.333
           GAS-PEN: 0.333
         oil:
-          weight: 0.333
+          weight: 0.25
           CRUDE_W_micro: 1.0
         products:
-          weight: 0.333
+          weight: 0.25
           GASOIL: 0.333
           GASOILINE: 0.333
           HEATOIL: 0.333
+        emissions:
+          weight: 0.25
+          EUA: 1.0
       Equity:
         weight: 0.143
         Americas:
@@ -541,20 +544,26 @@ instrument_weights:
         Asia:
           weight: 0.2
           japan:
-            weight: 1.0
+            weight: 0.5
             NIKKEI: 0.333
             NIKKEI400: 0.333
             TOPIX: 0.333
+          singapore:
+            weight: 0.5
+            MSCISING: 1.0
         EM:
           weight: 0.2
           china:
-            weight: 0.5
+            weight: 0.333
             FTSECHINAA: 0.333
             HANGTECH: 0.333
             HANG_mini: 0.333
           korea:
-            weight: 0.5
+            weight: 0.333
             KOSPI_mini: 1.0
+          taiwan:
+            weight: 0.333
+            MSCITAIWAN: 1.0
         EMEA:
           weight: 0.2
           eu:
@@ -661,7 +670,8 @@ instrument_weights:
         weight: 0.143
         crypto:
           weight: 0.333
-          BITCOIN: 1.0
+          BITCOIN: 0.5
+          ETHEREUM: 0.5
         industrial:
           weight: 0.333
           STEEL: 0.5
