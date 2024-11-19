@@ -146,7 +146,6 @@ def init_db_with_split_freq_csv_prices_for_code(
         )
 
     print(f"These contracts have the same length for daily and hourly: {same_length}")
-    print(f"These daily contracts are short: {too_short}")
 
 
 def init_db_with_daily_csv_prices_for_contract(
