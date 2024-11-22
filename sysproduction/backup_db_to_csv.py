@@ -46,7 +46,8 @@ def backup_db_to_csv():
 # SHOULD BE A 'BACKUP X' OPTION UNDER DIAGNOSTICS OR CONTROL?
 def quick_backup_of_all_price_data_including_expired():
     backup_data = get_data_and_create_csv_directories("Quick backup of all price data")
-    backup_futures_contract_prices_to_csv(backup_data, ignore_long_expired=False)
+    # backup also expired contracts
+    backup_futures_contract_prices_to_csv(backup_data, ignore_long_expired=True)
 
 
 class backupDbToCsv:
