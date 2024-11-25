@@ -462,27 +462,28 @@ instrument_weights:
         softs:
           weight: 0.25
           cocoa:
-            weight: 0.167
+            weight: 0.1667
             COCOA: 1.0
           coffee:
-            weight: 0.167
+            weight: 0.1667
             COFFEE: 0.5
             ROBUSTA: 0.5
           cotton:
-            weight: 0.167
+            weight: 0.1667
             COTTON2: 1.0
           milk:
-            weight: 0.167
-            BUTTER: 0.2
-            MILK: 0.2
-            MILKDRY: 0.2
-            MILKWET: 0.2
-            WHEY: 0.2
+            weight: 0.1667
+            BUTTER: 0.1667
+            CHEESE: 0.1667
+            MILK: 0.1667
+            MILKDRY: 0.1667
+            MILKWET: 0.1667
+            WHEY: 0.1667
           oj:
-            weight: 0.167
+            weight: 0.1667
             OJ: 1.0
           sugar:
-            weight: 0.167
+            weight: 0.1667
             SUGAR11: 0.5
             SUGAR_WHITE: 0.5
       Currencies:
@@ -507,14 +508,15 @@ instrument_weights:
           SGD: 0.0909
         em:
           weight: 0.3333
-          CLP: 0.125
-          CNH: 0.125
-          CZK: 0.125
-          IRS: 0.125
-          MXP: 0.125
-          PLN: 0.125
-          RUR: 0.125
-          ZAR: 0.125
+          BRE: 0.111
+          CLP: 0.111
+          CNH: 0.111
+          CZK: 0.111
+          IRS: 0.111
+          MXP: 0.111
+          PLN: 0.111
+          RUR: 0.111
+          ZAR: 0.111
       Energy:
         weight: 0.143
         gas:
@@ -594,19 +596,22 @@ instrument_weights:
                 EU-MID: 1.0
               smallcap:
                 weight: 0.333
-                EUROSTX-SMALL: 1.0
+                DJSTX-SMALL: 0.5
+                EUROSTX-SMALL: 0.5
             sector:
               weight: 0.4
-              EU-CHEM: 0.1
-              EU-CONSTRUCTION: 0.1
-              EU-DJ-TELECOM: 0.1
-              EU-DJ-UTIL: 0.1
-              EU-DJ-MEDIA: 0.1
-              EU-FOOD: 0.1
-              EU-HOUSE: 0.1
-              EU-INSURE: 0.1
-              EU-MEDIA: 0.1
-              EU-RETAIL: 0.1
+              EU-AUTO: 0.0833
+              EU-BANKS: 0.0833
+              EU-CHEM: 0.0833
+              EU-CONSTRUCTION: 0.0833
+              EU-DJ-TELECOM: 0.0833
+              EU-DJ-UTIL: 0.0833
+              EU-DJ-MEDIA: 0.0833
+              EU-FOOD: 0.0833
+              EU-HOUSE: 0.0833
+              EU-INSURE: 0.0833
+              EU-MEDIA: 0.0833
+              EU-RETAIL: 0.0833
           france:
             weight: 0.1666666667
             CAC: 1.0
@@ -688,8 +693,9 @@ instrument_weights:
           ETHER-micro: 0.5
         industrial:
           weight: 0.333
-          STEEL: 0.5
-          COPPER-micro: 0.5
+          ALUMINIUM: 0.333
+          STEEL: 0.333
+          COPPER-micro: 0.333
         precious:
           weight: 0.333
           GOLD_micro: 0.25
