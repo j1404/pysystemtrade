@@ -395,6 +395,9 @@ base_currency: "EUR"
 # instrument_div_multiplier: 2.5
 instrument_div_multiplier: 2.336141398808451
 
+# 119 instruments
+# instrument_div_multiplier: 2.1806309793125664
+
 # https://qoppac.blogspot.com/2022/02/exogenous-risk-overlay-take-two.html
 # default
 #risk_overlay:
@@ -453,6 +456,9 @@ instrument_weights:
             weight: 0.5
             FEEDCOW: 0.5
             LIVECOW: 0.5
+          pigs:
+            weight: 0.5
+            LEANHOG: 1.0
         softs:
           weight: 0.25
           cocoa:
@@ -483,8 +489,9 @@ instrument_weights:
         weight: 0.143
         cross:
           weight: 0.3333
-          GBPEUR: 0.5
-          YENEUR: 0.5
+          CHFJPY: 0.3333
+          GBPEUR: 0.3333
+          YENEUR: 0.3333
         developed:
           weight: 0.3333
           AUD: 0.0909
@@ -499,14 +506,15 @@ instrument_weights:
           SEK: 0.0909
           SGD: 0.0909
         em:
-          weight: 0.333
-          CLP: 0.143
-          CZK: 0.143
-          IRS: 0.143
-          MXP: 0.143
-          PLN: 0.143
-          RUR: 0.143
-          ZAR: 0.143
+          weight: 0.3333
+          CLP: 0.125
+          CNH: 0.125
+          CZK: 0.125
+          IRS: 0.125
+          MXP: 0.125
+          PLN: 0.125
+          RUR: 0.125
+          ZAR: 0.125
       Energy:
         weight: 0.143
         gas:
@@ -545,24 +553,30 @@ instrument_weights:
           weight: 0.2
           japan:
             weight: 0.5
-            NIKKEI: 0.333
-            NIKKEI400: 0.333
-            TOPIX: 0.333
+            NIKKEI: 0.25
+            NIKKEI400: 0.25
+            TOPIX: 0.25
+            JP-REALESTATE: 0.25
           singapore:
             weight: 0.5
             MSCISING: 1.0
         EM:
           weight: 0.2
+          brazil:
+            weight: 0.25
+            BOVESPA: 1.0
           china:
-            weight: 0.333
-            FTSECHINAA: 0.333
-            HANGTECH: 0.333
-            HANG_mini: 0.333
+            weight: 0.25
+            CHINAA-CON: 0.2
+            FTSECHINAA: 0.2
+            HANGENT: 0.2
+            HANGTECH: 0.2
+            HANG_mini: 0.2
           korea:
-            weight: 0.333
+            weight: 0.25
             KOSPI_mini: 1.0
           taiwan:
-            weight: 0.333
+            weight: 0.25
             MSCITAIWAN: 1.0
         EMEA:
           weight: 0.2
@@ -671,7 +685,7 @@ instrument_weights:
         crypto:
           weight: 0.333
           BITCOIN: 0.5
-          ETHEREUM: 0.5
+          ETHER-micro: 0.5
         industrial:
           weight: 0.333
           STEEL: 0.5
@@ -684,8 +698,9 @@ instrument_weights:
           SILVER: 0.25
       Volatility:
         weight: 0.143
-        VIX_mini: 0.5
-        VNKI: 0.5
+        V2X: 0.333
+        VIX_mini: 0.333
+        VNKI: 0.333
 
 
 # can calculated with systems/jani/static_estimation.yam & systems/jani/run_jani_system.py
