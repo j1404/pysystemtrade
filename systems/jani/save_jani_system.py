@@ -1,3 +1,4 @@
+import sys
 import datetime
 
 from syscore.constants import arg_not_supplied
@@ -91,4 +92,10 @@ def futures_do_system(
 
 
 if __name__ == "__main__":
-    save_system("systems.jani.dynamic_system_jani_v1_quick.yaml")
+    args = None
+    my_args = sys.argv
+    if len(sys.argv) > 1:
+        config_path = sys.argv[1]
+    else:
+        config_path = DEFAULT_CONFIG
+    save_system(config_path)
