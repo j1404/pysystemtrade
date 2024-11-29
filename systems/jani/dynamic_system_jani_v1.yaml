@@ -444,8 +444,9 @@ instrument_weights:
             SOYOIL: 0.333
           wheat:
             weight: 0.1667
-            REDWHEAT: 0.5
-            WHEAT: 0.5
+            MILLWHEAT: 0.333
+            REDWHEAT: 0.333
+            WHEAT: 0.333
         index:
           weight: 0.25
           GICS: 0.5
@@ -462,17 +463,18 @@ instrument_weights:
         softs:
           weight: 0.25
           cocoa:
-            weight: 0.1667
-            COCOA: 1.0
+            weight: 0.125
+            COCOA: 0.5
+            COCOA_LDN: 0.5
           coffee:
-            weight: 0.1667
+            weight: 0.125
             COFFEE: 0.5
             ROBUSTA: 0.5
           cotton:
-            weight: 0.1667
+            weight: 0.125
             COTTON2: 1.0
           milk:
-            weight: 0.1667
+            weight: 0.125
             BUTTER: 0.1667
             CHEESE: 0.1667
             MILK: 0.1667
@@ -480,43 +482,52 @@ instrument_weights:
             MILKWET: 0.1667
             WHEY: 0.1667
           oj:
-            weight: 0.1667
+            weight: 0.125
             OJ: 1.0
+          rubber:
+            weight: 0.125
+            RUBBER: 1.0
           sugar:
-            weight: 0.1667
+            weight: 0.125
             SUGAR11: 0.5
             SUGAR_WHITE: 0.5
+          wood:
+            weight: 0.125
+            LUMBER-new: 1.0
       Currencies:
         weight: 0.143
         cross:
           weight: 0.3333
-          CHFJPY: 0.3333
-          GBPEUR: 0.3333
-          YENEUR: 0.3333
+          CHFJPY: 0.2
+          EURCHF: 0.2
+          GBPCHF: 0.2
+          GBPEUR: 0.2
+          YENEUR: 0.2
         developed:
           weight: 0.3333
-          AUD: 0.0909
+          AUD_micro: 0.0909
           CAD: 0.0909
           CHF: 0.0909
           DX: 0.0909
           EUR_micro: 0.0909
           GBP: 0.0909
-          JPY_mini: 0.0909
+          JPY: 0.0909
           NOK: 0.0909
           NZD: 0.0909
           SEK: 0.0909
           SGD: 0.0909
         em:
           weight: 0.3333
-          BRE: 0.111
-          CLP: 0.111
-          CNH: 0.111
-          CZK: 0.111
-          IRS: 0.111
-          MXP: 0.111
-          PLN: 0.111
-          RUR: 0.111
-          ZAR: 0.111
+          BRE: 0.1
+          CLP: 0.1
+          CNH: 0.1
+          CZK: 0.1
+          IRS: 0.1
+          KRWUSD_mini: 0.1
+          MXP: 0.1
+          PLN: 0.1
+          RUR: 0.1
+          ZAR: 0.1
       Energy:
         weight: 0.143
         gas:
@@ -540,25 +551,33 @@ instrument_weights:
         Americas:
           weight: 0.2
           index:
-            weight: 1.0
+            weight: 0.6
             largecap:
               weight: 0.6
-              DOW: 0.25
-              SP500_micro: 0.25
-              NASDAQ_micro: 0.25
-              R1000: 0.25
+              DOW: 0.2
+              FANG: 0.2
+              SP500_micro: 0.2
+              NASDAQ_micro: 0.2
+              R1000: 0.2
             midcap:
               weight: 0.4
               RUSSELL: 0.5
               SP400: 0.5
+          sector:
+            weight: 0.4
+            US-DISCRETE: 0.25
+            US-ENERGY: 0.25
+            US-FINANCE: 0.25
+            US-HEALTH: 0.25
         Asia:
           weight: 0.2
           japan:
             weight: 0.5
-            NIKKEI: 0.25
-            NIKKEI400: 0.25
-            TOPIX: 0.25
-            JP-REALESTATE: 0.25
+            NIKKEI: 0.2
+            NIKKEI400: 0.2
+            TOPIX: 0.2
+            JP-REALESTATE: 0.2
+            MUMMY: 0.2
           singapore:
             weight: 0.5
             MSCISING: 1.0
@@ -571,7 +590,7 @@ instrument_weights:
             weight: 0.25
             CHINAA-CON: 0.2
             FTSECHINAA: 0.2
-            HANGENT: 0.2
+            HANGENT_mini: 0.2
             HANGTECH: 0.2
             HANG_mini: 0.2
           korea:
@@ -579,18 +598,21 @@ instrument_weights:
             KOSPI_mini: 1.0
           taiwan:
             weight: 0.25
-            MSCITAIWAN: 1.0
+            MSCITAIWAN: 0.5
+            FTSETAIWAN: 0.5
         EMEA:
           weight: 0.2
           eu:
-            weight: 0.1666666667
+            weight: 0.143
             index:
               weight: 0.6
               largecap:
                 weight: 0.333
-                EUROSTX: 0.333
-                EUROSTX-LARGE: 0.333
-                EUROSTX200-LARGE: 0.333
+                EURO600: 0.2
+                EUROSTX: 0.2
+                EUROSTX-LARGE: 0.2
+                EUROSTX200-LARGE: 0.2
+                EU-DIV30: 0.2
               midcap:
                 weight: 0.333
                 EU-MID: 1.0
@@ -600,34 +622,45 @@ instrument_weights:
                 EUROSTX-SMALL: 0.5
             sector:
               weight: 0.4
-              EU-AUTO: 0.0833
-              EU-BANKS: 0.0833
-              EU-CHEM: 0.0833
-              EU-CONSTRUCTION: 0.0833
-              EU-DJ-TELECOM: 0.0833
-              EU-DJ-UTIL: 0.0833
-              EU-DJ-MEDIA: 0.0833
-              EU-FOOD: 0.0833
-              EU-HOUSE: 0.0833
-              EU-INSURE: 0.0833
-              EU-MEDIA: 0.0833
-              EU-RETAIL: 0.0833
+              EU-AUTO: 0.0526
+              EU-BASIC: 0.0526
+              EU-BANKS: 0.0526
+              EU-CHEM: 0.0526
+              EU-CONSTRUCTION: 0.0526
+              EU-DJ-TELECOM: 0.0526
+              EU-DJ-UTIL: 0.0526
+              EU-DJ-MEDIA: 0.0526
+              EU-FOOD: 0.0526
+              EU-HEALTH: 0.0526
+              EU-HOUSE: 0.0526
+              EU-INSURE: 0.0526
+              EU-MEDIA: 0.0526
+              EU-OIL: 0.0526
+              EU-REALESTATE: 0.0526
+              EU-RETAIL: 0.0526
+              EU-TECH: 0.0526
+              EU-TRAVEL: 0.0526
+              EU-UTILS: 0.0526
           france:
-            weight: 0.1666666667
+            weight: 0.143
             CAC: 1.0
           germany:
-            weight: 0.1666666667
+            weight: 0.143
             DAX: 1.0
           netherlands:
-            weight: 0.1666666667
+            weight: 0.143
             AEX: 1.0
+          spain:
+            weight: 0.143
+            IBEX: 1.0
           swiss:
-            weight: 0.1666666667
+            weight: 0.143
             SMI: 0.5
             SMI-MID: 0.5
           uk:
-            weight: 0.1666666667
-            FTSE100: 1.0
+            weight: 0.143
+            FTSE100: 0.5
+            FTSE250: 0.5
         World:
           weight: 0.2
           MSCIEAFA: 1.0
@@ -693,9 +726,10 @@ instrument_weights:
           ETHER-micro: 0.5
         industrial:
           weight: 0.333
-          ALUMINIUM: 0.333
-          STEEL: 0.333
-          COPPER-micro: 0.333
+          ALUMINIUM: 0.25
+          COPPER-micro: 0.25
+          IRON: 0.25
+          STEEL: 0.25
         precious:
           weight: 0.333
           GOLD_micro: 0.25

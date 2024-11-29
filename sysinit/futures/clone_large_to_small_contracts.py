@@ -10,7 +10,10 @@ mapping_dict = dict(
     #    KOSPI="KOSPI_mini",
     #    NASDAQ="NASDAQ_micro",
     #    EUR="EUR_micro",
-    COPPER="COPPER-micro",
+    #	 COPPER="COPPER-micro",
+    #    HANGENT="HANGENT_mini",
+    #	 AUD="AUD_micro",
+    	 KRWUSD="KRWUSD_mini",
 )
 
 
