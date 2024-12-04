@@ -339,47 +339,48 @@ forecast_cap: 20.0
 
 # calculated with systems/jani/static_estimation.yam & systems/jani/run_jani_system.py
 # need to be re-estimated when adding/removing rules, dont't change if instruments change
+# calculated 2024-12-02 with 167 instruments
 forecast_scalars:
-  accel16: 7.871358878858734
-  accel32: 5.659225874372126
-  accel64: 3.9466567148063514
-  assettrend16: 13.278919799409636
-  assettrend2: 38.24338987281818
-  assettrend32: 8.444702941573576
-  assettrend4: 27.308298234170305
-  assettrend64: 5.195272055317196
-  assettrend8: 19.431777156494086
-  breakout10: 0.714698388384173
-  breakout160: 0.8771433989948221
-  breakout20: 0.8049926241334285
-  breakout320: 0.8543487916918481
-  breakout40: 0.838392906704176
-  breakout80: 0.8675986080986304
-  carry10: 30.958901784823365
-  carry125: 33.50822767210527
-  carry30: 31.27146607555302
-  carry60: 31.929298032110488
-  momentum16: 5.090420860696628
-  momentum32: 3.419947554552708
-  momentum4: 10.494685037777735
-  momentum64: 2.3143359039794396
-  momentum8: 7.352950537583365
-  mrinasset1000: 698.1721458751273
-  normmom16: 13.220473259867095
-  normmom2: 40.736874756415936
-  normmom32: 9.0327265794168
-  normmom4: 28.07803429713433
-  normmom64: 6.133953383978977
-  normmom8: 19.350061876013758
-  relcarry: 61.50531556793833
-  relmomentum10: 79.54909197158025
-  relmomentum20: 113.07989311299727
-  relmomentum40: 155.6712754441069
-  relmomentum80: 213.15866522552025
-  skewabs180: 4.492594103861373
-  skewabs365: 2.4316498311604033
-  skewrv180: 4.912953075723948
-  skewrv365: 2.90331154920043
+  accel16: 7.90420708752373
+  accel32: 5.634758687096075
+  accel64: 3.9419387126357583
+  assettrend16: 13.063760200525639
+  assettrend2: 37.9982528562994
+  assettrend32: 8.230596810483377
+  assettrend4: 27.118755435395368
+  assettrend64: 5.209209421384404
+  assettrend8: 19.294579299642002
+  breakout10: 0.7108274768147572
+  breakout160: 0.8732150438878987
+  breakout20: 0.8012017327322217
+  breakout320: 0.8512543586775185
+  breakout40: 0.8363650108350157
+  breakout80: 0.8617476171325137
+  carry10: 30.432807516196227
+  carry125: 32.94349827383426
+  carry30: 30.798523261001552
+  carry60: 31.372403697470087
+  momentum16: 5.100207509148723
+  momentum32: 3.452305813572592
+  momentum4: 10.561894803193944
+  momentum64: 2.343656709989276
+  momentum8: 7.376325451226799
+  mrinasset1000: 631.119755753402
+  normmom16: 13.199917834662806
+  normmom2: 41.173220967546214
+  normmom32: 9.114436440089175
+  normmom4: 28.262286501142828
+  normmom64: 6.285057018456612
+  normmom8: 19.347940830941447
+  relcarry: 53.83340266422386
+  relmomentum10: 73.7156125831677
+  relmomentum20: 104.79526132806518
+  relmomentum40: 145.9000176703191
+  relmomentum80: 202.67553626626244
+  skewabs180: 4.5556239127530755
+  skewabs365: 2.4456690414864677
+  skewrv180: 4.945406311885691
+  skewrv365: 2.8852369457430838
 
 #
 percentage_vol_target: 25.0
@@ -393,10 +394,10 @@ base_currency: "EUR"
 #
 # calculated with systems/jani/static_estimation.yaml & systems/jani/run_jani_system.py
 # instrument_div_multiplier: 2.5
-instrument_div_multiplier: 2.336141398808451
+# 119 instruments => 2.1806309793125664
+# 167 instruments => 2.381407372037411
+instrument_div_multiplier: 2.381407372037411
 
-# 119 instruments
-# instrument_div_multiplier: 2.1806309793125664
 
 # https://qoppac.blogspot.com/2022/02/exogenous-risk-overlay-take-two.html
 # default
@@ -444,9 +445,10 @@ instrument_weights:
             SOYOIL: 0.333
           wheat:
             weight: 0.1667
-            MILLWHEAT: 0.333
-            REDWHEAT: 0.333
-            WHEAT: 0.333
+            MILLWHEAT: 0.25
+            REDWHEAT: 0.25
+            WHEAT: 0.25
+            WHEAT_ICE: 0.25
         index:
           weight: 0.25
           GICS: 0.5
@@ -498,11 +500,15 @@ instrument_weights:
         weight: 0.143
         cross:
           weight: 0.3333
-          CHFJPY: 0.2
-          EURCHF: 0.2
-          GBPCHF: 0.2
-          GBPEUR: 0.2
-          YENEUR: 0.2
+          AUDJPY: 0.111
+          CHFJPY: 0.111
+          EURAUD: 0.111
+          EURCAD: 0.111
+          EURCHF: 0.111
+          GBPCHF: 0.111
+          GBPEUR: 0.111
+          GBPJPY: 0.111
+          YENEUR: 0.111
         developed:
           weight: 0.3333
           AUD_micro: 0.0909
@@ -518,16 +524,17 @@ instrument_weights:
           SGD: 0.0909
         em:
           weight: 0.3333
-          BRE: 0.1
-          CLP: 0.1
-          CNH: 0.1
-          CZK: 0.1
-          IRS: 0.1
-          KRWUSD_mini: 0.1
-          MXP: 0.1
-          PLN: 0.1
-          RUR: 0.1
-          ZAR: 0.1
+          BRE: 0.0909
+          CLP: 0.0909
+          CNH: 0.0909
+          CZK: 0.0909
+          INR: 0.0909
+          IRS: 0.0909
+          KRWUSD_mini: 0.0909
+          MXP: 0.0909
+          PLN: 0.0909
+          RUR: 0.0909
+          ZAR: 0.0909
       Energy:
         weight: 0.143
         gas:
@@ -537,7 +544,9 @@ instrument_weights:
           GAS-PEN: 0.333
         oil:
           weight: 0.25
-          CRUDE_W_micro: 1.0
+          BRENT_W: 0.333
+          CRUDE_W_micro: 0.333
+          CRUDE_ICE: 0.333
         products:
           weight: 0.25
           GASOIL: 0.333
@@ -565,10 +574,19 @@ instrument_weights:
               SP400: 0.5
           sector:
             weight: 0.4
-            US-DISCRETE: 0.25
-            US-ENERGY: 0.25
-            US-FINANCE: 0.25
-            US-HEALTH: 0.25
+            US-DISCRETE: 0.1
+            US-ENERGY: 0.1
+            US-FINANCE: 0.1
+            US-HEALTH: 0.1
+            US-INDUSTRY: 0.1
+            US-MATERIAL: 0.1
+            US-STAPLES: 0.1
+            US-TECH: 0.1
+            US-UTILS: 0.1
+            # housing sector 0.1
+            HOUSE-US: 0.0333
+            US-PROPERTY: 0.0333
+            US-REALESTATE: 0.0333
         Asia:
           weight: 0.2
           japan:
@@ -580,7 +598,8 @@ instrument_weights:
             MUMMY: 0.2
           singapore:
             weight: 0.5
-            MSCISING: 1.0
+            MSCISING: 0.5
+            SGX: 0.5
         EM:
           weight: 0.2
           brazil:
@@ -603,7 +622,7 @@ instrument_weights:
         EMEA:
           weight: 0.2
           eu:
-            weight: 0.143
+            weight: 0.125
             index:
               weight: 0.6
               largecap:
@@ -622,48 +641,52 @@ instrument_weights:
                 EUROSTX-SMALL: 0.5
             sector:
               weight: 0.4
-              EU-AUTO: 0.0526
-              EU-BASIC: 0.0526
-              EU-BANKS: 0.0526
-              EU-CHEM: 0.0526
-              EU-CONSTRUCTION: 0.0526
-              EU-DJ-TELECOM: 0.0526
-              EU-DJ-UTIL: 0.0526
-              EU-DJ-MEDIA: 0.0526
-              EU-FOOD: 0.0526
-              EU-HEALTH: 0.0526
-              EU-HOUSE: 0.0526
-              EU-INSURE: 0.0526
-              EU-MEDIA: 0.0526
-              EU-OIL: 0.0526
-              EU-REALESTATE: 0.0526
-              EU-RETAIL: 0.0526
-              EU-TECH: 0.0526
-              EU-TRAVEL: 0.0526
-              EU-UTILS: 0.0526
+              EU-AUTO: 0.0556
+              EU-BASIC: 0.0556
+              EU-BANKS: 0.0556
+              EU-CHEM: 0.0556
+              EU-CONSTRUCTION: 0.0556
+              EU-DJ-TELECOM: 0.0556
+              EU-DJ-UTIL: 0.0556
+              EU-FOOD: 0.0556
+              EU-HEALTH: 0.0556
+              EU-HOUSE: 0.0556
+              EU-INSURE: 0.0556
+              EU-MEDIA: 0.0556
+              EU-OIL: 0.0556
+              EU-REALESTATE: 0.0556
+              EU-RETAIL: 0.0556
+              EU-TECH: 0.0556
+              EU-TRAVEL: 0.0556
+              EU-UTILS: 0.0556
+          finland:
+            weight: 0.125
+            OMX: 1.0
           france:
-            weight: 0.143
+            weight: 0.125
             CAC: 1.0
           germany:
-            weight: 0.143
+            weight: 0.125
             DAX: 1.0
           netherlands:
-            weight: 0.143
+            weight: 0.125
             AEX: 1.0
           spain:
-            weight: 0.143
+            weight: 0.125
             IBEX: 1.0
           swiss:
-            weight: 0.143
-            SMI: 0.5
-            SMI-MID: 0.5
+            weight: 0.125
+            SMI: 0.333
+            SMI-MID: 0.333
+            SWISSLEAD: 0.333
           uk:
-            weight: 0.143
+            weight: 0.125
             FTSE100: 0.5
             FTSE250: 0.5
         World:
           weight: 0.2
-          MSCIEAFA: 1.0
+          MSCIEAFA: 0.5
+          MSCIWORLD: 0.5
       InterestRates:
         weight: 0.143
         Americas:
@@ -695,7 +718,8 @@ instrument_weights:
           weight: 0.4
           eu:
             weight: 0.143
-            EURIBOR: 1.0
+            EURIBOR: 0.5
+            EURIBOR-ICE: 0.5
           france:
             weight: 0.143
             OAT: 1.0
@@ -848,5 +872,6 @@ forecast_weights:
 # can be calculated with systems/jani/static_estimation.yaml & systems/jani/run_jani_system.py
 # average of 38 instruments = 2.1
 # average of 63 instruments = 2.2
-forecast_div_multiplier: 2.2
+# average of 167 instruments = 2.122603442
+forecast_div_multiplier: 2.122603442
 
