@@ -392,6 +392,7 @@ instruments:
   - WHEY
   # Currencies
   - AUD_micro
+  - AUDJPY
   - BRE
   - CAD
   - CHF
@@ -401,10 +402,13 @@ instruments:
   - CZK
   - DX
   - EUR_micro
+  - EURAUD
+  - EURCAD
   - EURCHF
   - GBP
   - GBPCHF
   - GBPEUR
+  - GBPJPY
   - IRS
   - JPY
   - KRWUSD_mini
@@ -418,10 +422,11 @@ instruments:
   - YENEUR
   - ZAR
   # Energy
+  - BRENT_W
+  # CRUDE_ICE backtest crashes
   - CRUDE_W_micro
   - EUA
   - GAS_US_mini
-  - GAS-LAST
   - GASOIL
   - GASOILINE
   - GAS-PEN
@@ -441,7 +446,6 @@ instruments:
   - EU-CONSTRUCTION
   - EU-DIV30
   - EU-DJ-TELECOM
-  - EU-DJ-UTIL
   - EU-FOOD
   - EU-HEALTH
   - EU-HOUSE
@@ -453,15 +457,13 @@ instruments:
   - EU-RETAIL
   - EURO600
   - EUROSTX
-  - EUROSTX200-LARGE
-  - EUROSTX-LARGE
   - EUROSTX-SMALL
   - EU-TECH
   - EU-TRAVEL
   - EU-UTILS
   - FANG
   - FTSE100
-  - FTSE250
+  # FTSE250 backtest crashes
   - FTSECHINAA
   - FTSETAIWAN
   - HANG_mini
@@ -477,17 +479,24 @@ instruments:
   - NASDAQ_micro
   - NIKKEI
   - NIKKEI400
+  - OMX
   - R1000
   - RUSSELL
   - SMI
   - SMI-MID
   - SP400
   - SP500_micro
-  - TOPIX
+  - SWISSLEAD
   - US-DISCRETE
   - US-ENERGY
   - US-FINANCE
   - US-HEALTH
+  - US-INDUSTRY
+  - US-MATERIAL
+  - US-REALESTATE
+  - US-STAPLES
+  - US-TECH
+  - US-UTILS
   # InterestRates
   - BOBL
   - BONO
@@ -497,7 +506,6 @@ instruments:
   - BUXL
   - CAD10
   - CH10
-  - EURIBOR
   - FED
   # GILT # backtest crashes
   - JGB-SGX-mini

@@ -20,14 +20,11 @@ from systems.positionsizing import PositionSizing
 
 from systems.provided.rob_system.rawdata import myFuturesRawData
 
-# CONFIG = "systems.jani.dynamic_system_jani_v1.yaml"
-# SAVED_SYSTEM = "systems.jani.dynamic_system_jani_v1.pck"
+CONFIG = "systems.jani.static_estimation_RobsJumbo.yaml"
+SAVED_SYSTEM = "systems.jani.static_estimation_RobsJumbo.pck"
 
-# CONFIG = "systems.jani.static_estimation.yaml"
-# SAVED_SYSTEM = "systems.jani.static_estimation.pck"
-
-CONFIG = "systems.jani.dynamic_system_jani_v1_backtest_RobsJumbo.yaml"
-SAVED_SYSTEM = "systems.jani.dynamic_system_jani_v1_backtest_RobsJumbo.pck"
+#CONFIG = "systems.jani.static_estimation.yaml"
+#SAVED_SYSTEM = "systems.jani.static_estimation.pck"
 
 log = get_logger("backtest")
 
