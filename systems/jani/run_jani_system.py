@@ -23,8 +23,8 @@ from systems.provided.rob_system.rawdata import myFuturesRawData
 CONFIG = "systems.jani.static_estimation_RobsJumbo.yaml"
 SAVED_SYSTEM = "systems.jani.static_estimation_RobsJumbo.pck"
 
-#CONFIG = "systems.jani.static_estimation.yaml"
-#SAVED_SYSTEM = "systems.jani.static_estimation.pck"
+# CONFIG = "systems.jani.static_estimation.yaml"
+# SAVED_SYSTEM = "systems.jani.static_estimation.pck"
 
 log = get_logger("backtest")
 
