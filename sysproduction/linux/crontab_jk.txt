@@ -9,7 +9,7 @@ PYSYS_CODE=/home/alpha/pysystemtrade
 SCRIPT_PATH=/home/alpha/pysystemtrade/sysproduction/linux/scripts
 ECHO_PATH=/home/alpha/data/echos
 PYSYS_PRIVATE_CONFIG_DIR=/home/alpha/pst_private/prod
-#PYSYS_LOGGING_CONFIG=syslogging.logging_prod.yaml
+PYSYS_LOGGING_CONFIG=syslogging.logging_prod.yaml
 
 #0,15,30,45 * * * 1-7 export DISPLAY=:1 && /bin/bash /opt/ibc/gatewaystart.sh
 
