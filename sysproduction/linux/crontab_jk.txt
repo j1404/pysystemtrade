@@ -23,6 +23,7 @@ PYSYS_LOGGING_CONFIG=syslogging.logging_prod.yaml
 00 21  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-clean >> $ECHO_PATH/run_cleaners.txt 2>&1; deactivate
 15 21  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-backup >> $ECHO_PATH/run_backups_echos.txt 2>&1; deactivate
 30 21  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-reports >> $ECHO_PATH/run_reports.txt 2>&1; deactivate
+*/5 *  * * 1-5     source $PYSYS_CODE/venv/3.10.12/bin/activate; pst-monitor >> $ECHO_PATH/run_monitor.txt 2>&1; deactivate
 
 # * * * * *        source $PYSYS_CODE/venv/3.10.12/bin/activate; echo "`date` `conda run -n py_310 python -VV`, $SCRIPT_PATH, $PYSYS_CODE, $ECHO_PATH" >> $ECHO_PATH/cron_test.txt 2>&1; deactivate
 #
