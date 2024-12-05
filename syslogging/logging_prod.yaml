@@ -32,4 +32,4 @@ root:
   handlers:
     - console
     - email
-    - socket
+    # - socket  # disable single file log via socket server
