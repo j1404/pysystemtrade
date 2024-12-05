@@ -14,12 +14,13 @@ handlers:
     class: syslogging.handlers.PstSMTPHandler
     level: CRITICAL
     formatter: simple
-  socket:
-    class: logging.handlers.SocketHandler
-    host: localhost
-    port: 9020
-    level: DEBUG
-    formatter: simple
+# disable single file log via socket server
+#  socket:
+#    class: logging.handlers.SocketHandler
+#    host: localhost
+#    port: 9020
+#    level: DEBUG
+#    formatter: simple
 loggers:
   ib_insync:
     level: WARNING
