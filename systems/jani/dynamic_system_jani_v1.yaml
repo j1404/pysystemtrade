@@ -589,15 +589,18 @@ instrument_weights:
             US-REALESTATE: 0.0333
         Asia:
           weight: 0.2
+          australia:
+            weight: 0.333
+            SPI200: 1.0
           japan:
-            weight: 0.5
+            weight: 0.333
             NIKKEI: 0.2
             NIKKEI400: 0.2
             TOPIX: 0.2
             JP-REALESTATE: 0.2
             MUMMY: 0.2
           singapore:
-            weight: 0.5
+            weight: 0.333
             MSCISING: 0.5
             SGX: 0.5
         EM:
