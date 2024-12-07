@@ -2,6 +2,7 @@ import sys
 import datetime
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from syscore.constants import arg_not_supplied
