@@ -537,24 +537,28 @@ instrument_weights:
           ZAR: 0.0909
       Energy:
         weight: 0.143
+        emissions:
+          weight: 0.2
+          EUA: 1.0
+        coal:
+          weight: 0.2
+          COAL: 0.5
+          COAL-GEORDIE: 0.5
         gas:
-          weight: 0.25
+          weight: 0.2
           GAS-LAST: 0.333
           GAS_US_mini: 0.333
           GAS-PEN: 0.333
         oil:
-          weight: 0.25
+          weight: 0.2
           BRENT_W: 0.333
           CRUDE_W_micro: 0.333
           CRUDE_ICE: 0.333
         products:
-          weight: 0.25
+          weight: 0.2
           GASOIL: 0.333
           GASOILINE: 0.333
           HEATOIL: 0.333
-        emissions:
-          weight: 0.25
-          EUA: 1.0
       Equity:
         weight: 0.143
         Americas:
@@ -696,14 +700,15 @@ instrument_weights:
           weight: 0.4
           govvie:
             weight: 0.6
-            US2: 0.125
-            US3: 0.125
-            US5: 0.125
-            US10: 0.125
-            US10U: 0.125
-            US20: 0.125
-            US30: 0.125
-            CAD10: 0.125
+            US2: 0.111
+            US3: 0.111
+            US5: 0.111
+            US10: 0.111
+            US10U: 0.111
+            US20: 0.111
+            US30: 0.111
+            CAD5: 0.111
+            CAD10: 0.111
           stir:
             weight: 0.4
             SOFR: 0.5
@@ -721,8 +726,10 @@ instrument_weights:
           weight: 0.4
           eu:
             weight: 0.143
-            EURIBOR: 0.5
-            EURIBOR-ICE: 0.5
+            EURIBOR: 0.25
+            EURIBOR-ICE: 0.25
+            SARONA: 0.25
+            SONIA3: 0.25
           france:
             weight: 0.143
             OAT: 1.0

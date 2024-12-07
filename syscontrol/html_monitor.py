@@ -16,7 +16,7 @@ def html_monitor():
         check_if_pid_running_and_if_not_finish(process_observatory)
         process_observatory.update_all_status_with_process_control()
         build_dashboard(data, create_monitor_context(process_observatory))
-        # build_report_files(data, {})
+        build_report_files(data, {})
         data.log.debug("HTML process monitor done.")
 
 

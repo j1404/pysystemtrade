@@ -1,6 +1,8 @@
 import datetime
-
 import yaml
+
+from dotenv import load_dotenv
+load_dotenv()
 
 from syscore.constants import arg_not_supplied
 from syscore.fileutils import resolve_path_and_filename_for_package
@@ -20,8 +22,8 @@ from systems.positionsizing import PositionSizing
 
 from systems.provided.rob_system.rawdata import myFuturesRawData
 
-CONFIG = "systems.jani.static_estimation_RobsJumbo.yaml"
-SAVED_SYSTEM = "systems.jani.static_estimation_RobsJumbo.pck"
+CONFIG = "systems.jani.static_estimation_50instr.yaml"
+SAVED_SYSTEM = "systems.jani.static_estimation_50instr.pck"
 
 # CONFIG = "systems.jani.static_estimation.yaml"
 # SAVED_SYSTEM = "systems.jani.static_estimation.pck"
