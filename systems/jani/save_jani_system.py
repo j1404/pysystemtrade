@@ -1,6 +1,9 @@
 import sys
 import datetime
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from syscore.constants import arg_not_supplied
 from sysdata.config.configdata import Config
 from sysdata.sim.db_futures_sim_data import dbFuturesSimData
