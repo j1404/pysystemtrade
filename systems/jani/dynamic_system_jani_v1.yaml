@@ -517,7 +517,7 @@ instrument_weights:
           DX: 0.0909
           EUR_micro: 0.0909
           GBP: 0.0909
-          JPY: 0.0909
+          JPY_mini: 0.0909
           NOK: 0.0909
           NZD: 0.0909
           SEK: 0.0909

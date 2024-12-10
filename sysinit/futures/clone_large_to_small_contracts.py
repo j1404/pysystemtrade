@@ -12,8 +12,11 @@ mapping_dict = dict(
     #    EUR="EUR_micro",
     # 	 COPPER="COPPER-micro",
     #    HANGENT="HANGENT_mini",
-    # 	 AUD="AUD_micro",
-    KRWUSD="KRWUSD_mini",
+    #	 KRWUSD="KRWUSD_mini",
+    #	 SOYBEAN="SOYBEAN_mini",
+    #	 VIX="VIX_mini",
+    #	 JPY="JPY_mini",
+     	 AUD="AUD_micro",
 )
 
 
