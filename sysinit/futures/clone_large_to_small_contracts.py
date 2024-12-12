@@ -5,18 +5,18 @@ from sysinit.futures.clone_data_for_instrument import clone_data_for_instrument
 mapping_dict = dict(
     #    SP500="SP500_micro",
     #    CRUDE_W="CRUDE_W_mini",
-    #    GOLD="GOLD_micro",
     #    KOSPI="KOSPI_mini",
     #    NASDAQ="NASDAQ_micro",
     #    EUR="EUR_micro",
-    # 	 COPPER="COPPER-micro",
     #    HANGENT="HANGENT_mini",
     #	 KRWUSD="KRWUSD_mini",
     #	 SOYBEAN="SOYBEAN_mini",
     #	 VIX="VIX_mini",
     #	 JPY="JPY_mini",
     # 	 AUD="AUD_micro",
-    GAS_US="GAS_US_mini",
+    #	 GAS_US="GAS_US_mini",
+    #    COPPER="COPPER-micro",
+    GOLD="GOLD_micro",
 )
 
 
