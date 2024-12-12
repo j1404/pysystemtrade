@@ -13,10 +13,10 @@ mapping_dict = dict(
     #	 SOYBEAN="SOYBEAN_mini",
     #	 VIX="VIX_mini",
     #	 JPY="JPY_mini",
-    # 	 AUD="AUD_micro",
     #	 GAS_US="GAS_US_mini",
     #    COPPER="COPPER-micro",
-    GOLD="GOLD_micro",
+    #	 GOLD="GOLD_micro",
+    AUD="AUD_micro",
 )
 
 
