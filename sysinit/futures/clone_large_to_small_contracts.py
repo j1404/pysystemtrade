@@ -6,7 +6,6 @@ mapping_dict = dict(
     #    SP500="SP500_micro",
     #    CRUDE_W="CRUDE_W_mini",
     #    KOSPI="KOSPI_mini",
-    #    NASDAQ="NASDAQ_micro",
     #    EUR="EUR_micro",
     #    HANGENT="HANGENT_mini",
     #	 KRWUSD="KRWUSD_mini",
@@ -16,7 +15,8 @@ mapping_dict = dict(
     #	 GAS_US="GAS_US_mini",
     #    COPPER="COPPER-micro",
     #	 GOLD="GOLD_micro",
-    AUD="AUD_micro",
+    #	 AUD="AUD_micro",
+    NASDAQ="NASDAQ_micro",
 )
 
 
