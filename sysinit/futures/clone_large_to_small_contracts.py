@@ -16,7 +16,9 @@ mapping_dict = dict(
     #    COPPER="COPPER-micro",
     #	 GOLD="GOLD_micro",
     #	 AUD="AUD_micro",
-    NASDAQ="NASDAQ_micro",
+    #    NASDAQ="NASDAQ_micro",
+    #    IBEX="IBEX_mini",
+    HANG="HANG_mini",
 )
 
 
