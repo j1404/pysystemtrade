@@ -4,6 +4,8 @@ from syscore.constants import arg_not_supplied
 from sysdata.config.configdata import Config
 from sysdata.sim.db_futures_sim_data import dbFuturesSimData
 
+# from sysdata.sim.csv_futures_sim_data import csvFuturesSimData
+
 from syslogging.logger import get_logger
 from systems.basesystem import System
 from systems.forecast_combine import ForecastCombine
@@ -33,6 +35,7 @@ def debug_system(config_path=None):
     log.info(f"Building system from {config_path}")
     config = Config(config_path)
     db_data = dbFuturesSimData()
+    # db_data = csvFuturesSimData()
 
     # create system
     system = futures_do_system(config=config, data=db_data)
