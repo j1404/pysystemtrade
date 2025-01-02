@@ -1,14 +1,13 @@
 #
 # static system to estimate weights
 #
-CONFIG = "systems.jani.static_estimation.yaml"
-SAVED_SYSTEM = "systems.jani.static_estimation.pck"
+CONFIG = "systems.jani.prod.static_estimation.yaml"
+SAVED_SYSTEM = "systems.jani.prod.static_estimation.pck"
 
 import datetime
 import yaml
 
 from dotenv import load_dotenv
-
 load_dotenv()
 
 from syscore.constants import arg_not_supplied
