@@ -1,0 +1,60 @@
+#YAML
+start_date: 2023-01-01
+
+instruments:
+  - SOYMEAL    #1970
+  - PLAT       #1970
+
+use_forecast_weight_estimates: False
+use_forecast_div_mult_estimates: False
+use_instrument_weight_estimates: False
+use_instrument_div_mult_estimates: False
+use_forecast_scale_estimates: False
+
+forecast_cap: 20.0
+percentage_vol_target: 25.0
+notional_trading_capital: 500000
+base_currency: "EUR"
+risk_overlay:
+  max_risk_fraction_normal_risk: 1.4
+  max_risk_fraction_stdev_risk: 3.6
+  max_risk_limit_sum_abs_risk: 3.4
+  max_risk_leverage: 13
+
+use_attenuation:
+   - 'breakout20'
+   - 'breakout40'
+
+trading_rules:
+  breakout20:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 20
+  breakout40:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 40
+
+### weights from static estimation ###
+
+forecast_div_multiplier:
+  PLAT: 1.0580029402473485
+  SOYMEAL: 1.0587972931871166
+forecast_scalars:
+  breakout20: 0.886531696240606
+  breakout40: 0.9250264475155652
+forecast_weights:
+  PLAT:
+    breakout20: 0.4511494864794486
+    breakout40: 0.5488505135205515
+  SOYMEAL:
+    breakout20: 0.4823268563063433
+    breakout40: 0.5176731436936568
+instrument_div_multiplier: 1.3243105479481334
+instrument_weights:
+  PLAT: 0.5
+  SOYMEAL: 0.5

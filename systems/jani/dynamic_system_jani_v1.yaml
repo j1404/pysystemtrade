@@ -524,17 +524,16 @@ instrument_weights:
           SGD: 0.0909
         em:
           weight: 0.3333
-          BRE: 0.0909
-          CLP: 0.0909
-          CNH: 0.0909
-          CZK: 0.0909
-          INR: 0.0909
-          IRS: 0.0909
-          KRWUSD_mini: 0.0909
-          MXP: 0.0909
-          PLN: 0.0909
-          RUR: 0.0909
-          ZAR: 0.0909
+          BRE: 0.1
+          CLP: 0.1
+          CNH: 0.1
+          CZK: 0.1
+          INR: 0.1
+          IRS: 0.1
+          MXP: 0.1
+          PLN: 0.1
+          RUR: 0.1
+          ZAR: 0.1
       Energy:
         weight: 0.143
         emissions:
