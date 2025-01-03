@@ -1,6 +1,10 @@
 # YAML
 start_date: 2000-01-01
 
+instruments:
+  - MILKDRY
+
+
 volatility_calculation:
   func: "sysquant.estimators.vol.mixed_vol_calc"
   days: 35
@@ -328,9 +332,6 @@ forecast_cap: 20.0
 percentage_vol_target: 25.0
 notional_trading_capital: 500000
 base_currency: "EUR"
-
-instruments:
-  - BUTTER
 
 
 exclude_instrument_lists:

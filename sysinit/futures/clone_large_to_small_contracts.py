@@ -18,7 +18,8 @@ mapping_dict = dict(
     # 	 AUD="AUD_micro",
     #    NASDAQ="NASDAQ_micro",
     #    IBEX="IBEX_mini",
-    HANG="HANG_mini",
+    # 	 HANG="HANG_mini",
+    ETHEREUM="ETHER-micro",
 )
 
 
