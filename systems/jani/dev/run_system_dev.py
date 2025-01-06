@@ -1,6 +1,8 @@
 #
 # development system backtest
 #
+DEFAULT_CONFIG = "systems.jani.dev.sim_config_dev.yaml"
+
 import sys
 import datetime
 import pandas as pd
@@ -13,6 +15,7 @@ from syscore.constants import arg_not_supplied
 from sysdata.config.configdata import Config
 from sysdata.sim.db_futures_sim_data import dbFuturesSimData
 
+# from sysdata.sim.csv_futures_sim_data import csvFuturesSimData
 from syslogging.logger import get_logger
 from sysproduction.strategy_code.run_dynamic_optimised_system import futures_system
 from systems.basesystem import System
@@ -32,7 +35,16 @@ from systems.risk import Risk
 
 log = get_logger("backtest")
 
-DEFAULT_CONFIG = "systems.jani.dev.sim_config_dev.yaml"
+
+def create_system(config_path=None):
+    if config_path is None:
+        config_path = DEFAULT_CONFIG
+
+    #log.info(f"Building system from {config_path}")
+    config = Config(config_path)
+    db_data = dbFuturesSimData()
+    system = futures_do_system(config=config, data=db_data)
+
 
 def futures_do_system(
     data=arg_not_supplied,
@@ -41,8 +53,10 @@ def futures_do_system(
 ):
     if data is arg_not_supplied:
         data = dbFuturesSimData()
+        # data = csvFuturesSimData()
 
     if config is arg_not_supplied:
+        #config = Config("systems.jani.dynamic_system_jani_v1.yaml")
         config = Config(DEFAULT_CONFIG)
 
     if trading_rules is arg_not_supplied:
@@ -65,34 +79,41 @@ def futures_do_system(
         data,
         config,
     )
+
     return system
 
 
-def run_system(
-    system=futures_do_system(),
-    portfolio=system.accounts.optimised_portfolio(),
-    portfolio_percent=system.accounts.portfolio().percent,
+system = futures_do_system()
+portfolio = system.accounts.optimised_portfolio()
+portfolio_percent = system.accounts.portfolio().percent
 
-    # performance
-    system.config.use_SR_costs=False,
-    perf_unrounded = system.accounts.portfolio(roundpositions=False).percent,
-    perf_rounded = system.accounts.portfolio(roundpositions=True).percent,
-    perf_optimised = system.accounts.optimised_portfolio().percent,
+# performance
 
-    performance = pd.concat([perf_unrounded.curve(), perf_rounded.curve(), perf_optimised.curve()], axis=1),
-    performance.columns = ["unrounded", "rounded", "optimised"],
+system.config.use_SR_costs = False
+perf_unrounded = system.accounts.portfolio(roundpositions=False).percent
+perf_rounded = system.accounts.portfolio(roundpositions=True).percent
+perf_optimised = system.accounts.optimised_portfolio().percent
 
-    print("Sim config file: ",DEFAULT_CONFIG),
-    print("Start date: ",system.config.start_date),
-    print("Notional trading capital: ",system.config.notional_trading_capital),
-    print("Instruments: ",system.portfolio.get_instrument_list()),
-    print(f"Stats as %: {portfolio_percent.stats()}"),
+performance = pd.concat([perf_unrounded.curve(), perf_rounded.curve(), perf_optimised.curve()], axis=1)
+performance.columns = ["unrounded", "rounded", "optimised"]
 
-    performance.plot(figsize=(15,9), title="Performance"),
-    show(),
-    )
+print("Sim config file: ",DEFAULT_CONFIG)
+print("Start date: ",system.config.start_date)
+print("Notional trading capital: ",system.config.notional_trading_capital)
+print("Instruments: ",system.portfolio.get_instrument_list())
+print(f"Stats as %: {portfolio_percent.stats()}")
+
+performance.plot(figsize=(15,9), title="Performance")
+show()
+
 
 
 if __name__ == "__main__":
-    run_system()
+    args = None
+    my_args = sys.argv
+    if len(sys.argv) > 1:
+        config_path = sys.argv[1]
+    else:
+        config_path = DEFAULT_CONFIG
+    create_system(config_path)
 

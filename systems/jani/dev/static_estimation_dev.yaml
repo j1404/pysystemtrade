@@ -2,8 +2,7 @@
 start_date: 2000-01-01
 
 instruments:
-  - MILKDRY
-
+  - ALUMINIUM
 
 volatility_calculation:
   func: "sysquant.estimators.vol.mixed_vol_calc"

@@ -1,5 +1,5 @@
 #YAML
-start_date: 2023-01-01
+start_date: 1970-01-01
 
 instruments:
   - SOYMEAL    #1970
@@ -14,7 +14,8 @@ use_forecast_scale_estimates: False
 forecast_cap: 20.0
 percentage_vol_target: 25.0
 notional_trading_capital: 500000
-base_currency: "EUR"
+#base_currency: "EUR"
+base_currency: "USD"
 risk_overlay:
   max_risk_fraction_normal_risk: 1.4
   max_risk_fraction_stdev_risk: 3.6
