@@ -1,8 +1,8 @@
 #
 # static system to estimate weights
 #
-CONFIG = "systems.jani.prod.static_estimation.yaml"
-SAVED_SYSTEM = "systems.jani.prod.static_estimation.pck"
+CONFIG = "systems.jani.debug.debug_static_estimation.yaml"
+SAVED_SYSTEM = ""
 
 import datetime
 import yaml
@@ -76,7 +76,8 @@ def write_estimate_file(system):
     now = datetime.datetime.now()
     sysdiag = systemDiag(system)
     output_file = resolve_path_and_filename_for_package(
-        f"systems.jani.estimate-{now.strftime('%Y-%m-%d_%H%M%S')}.yaml"
+        # f"systems.jani.estimate-{now.strftime('%Y-%m-%d_%H%M%S')}.yaml"
+        f"systems.jani.debug.debug_estimate.yaml"
     )
     print(f"writing estimate params to: {output_file}")
     estimates_needed = [

@@ -1,9 +1,10 @@
 #YAML
-#start_date: 1990-01-01
+start_date: 2001-01-01
 
 instruments:
   - SOYMEAL    #1970
   - PLAT       #1970
+  - SP500_micro        #1997
 
 use_forecast_weight_estimates: False
 use_forecast_div_mult_estimates: False
@@ -14,7 +15,6 @@ use_forecast_scale_estimates: False
 forecast_cap: 20.0
 percentage_vol_target: 25.0
 notional_trading_capital: 500000
-#base_currency: "EUR"
 base_currency: "USD"
 risk_overlay:
   max_risk_fraction_normal_risk: 1.4
@@ -43,19 +43,24 @@ trading_rules:
 ### weights from static estimation ###
 
 forecast_div_multiplier:
-  PLAT: 1.0580029402473485
-  SOYMEAL: 1.0587972931871166
+  PLAT: 1.0543469763162328
+  SOYMEAL: 1.0547297573361603
+  SP500_micro: 1.052587481696826
 forecast_scalars:
-  breakout20: 0.886531696240606
-  breakout40: 0.9250264475155652
+  breakout20: 0.8280860030809941
+  breakout40: 0.8686585920625391
 forecast_weights:
   PLAT:
-    breakout20: 0.4511494864794486
-    breakout40: 0.5488505135205515
+    breakout20: 0.48058020771522114
+    breakout40: 0.5194197922847787
   SOYMEAL:
-    breakout20: 0.4823268563063433
-    breakout40: 0.5176731436936568
-instrument_div_multiplier: 1.3243105479481334
+    breakout20: 0.5230615278708134
+    breakout40: 0.47693847212918655
+  SP500_micro:
+    breakout20: 0.4204149758646768
+    breakout40: 0.5795850241353231
+instrument_div_multiplier: 1.6029844555270107
 instrument_weights:
-  PLAT: 0.5
-  SOYMEAL: 0.5
+  PLAT: 0.28846944364400595
+  SOYMEAL: 0.4230611127101044
+  SP500_micro: 0.2884694436458896

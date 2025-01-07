@@ -1,0 +1,22 @@
+forecast_div_multiplier:
+  PLAT: 1.0543469763162328
+  SOYMEAL: 1.0547297573361603
+  SP500_micro: 1.052587481696826
+forecast_scalars:
+  breakout20: 0.8280860030809941
+  breakout40: 0.8686585920625391
+forecast_weights:
+  PLAT:
+    breakout20: 0.48058020771522114
+    breakout40: 0.5194197922847787
+  SOYMEAL:
+    breakout20: 0.5230615278708134
+    breakout40: 0.47693847212918655
+  SP500_micro:
+    breakout20: 0.4204149758646768
+    breakout40: 0.5795850241353231
+instrument_div_multiplier: 1.6029844555270107
+instrument_weights:
+  PLAT: 0.28846944364400595
+  SOYMEAL: 0.4230611127101044
+  SP500_micro: 0.2884694436458896

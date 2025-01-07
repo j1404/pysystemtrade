@@ -1,10 +1,23 @@
+#
+# development system backtest
+#
+DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
+
 import sys
+import datetime
+import pandas as pd
+from matplotlib.pyplot import show
+
+from dotenv import load_dotenv
+load_dotenv()
 
 from syscore.constants import arg_not_supplied
 from sysdata.config.configdata import Config
 from sysdata.sim.db_futures_sim_data import dbFuturesSimData
 
+# from sysdata.sim.csv_futures_sim_data import csvFuturesSimData
 from syslogging.logger import get_logger
+from sysproduction.strategy_code.run_dynamic_optimised_system import futures_system
 from systems.basesystem import System
 from systems.forecast_combine import ForecastCombine
 from systems.forecast_scale_cap import ForecastScaleCap
@@ -20,53 +33,17 @@ from systems.provided.dynamic_small_system_optimise.optimised_positions_stage im
 from systems.provided.rob_system.rawdata import myFuturesRawData
 from systems.risk import Risk
 
-DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
-
-
 log = get_logger("backtest")
 
 
-def debug_system(config_path=None):
+def create_system(config_path=None):
     if config_path is None:
         config_path = DEFAULT_CONFIG
 
-    log.info(f"Building system from {config_path}")
+    #log.info(f"Building system from {config_path}")
     config = Config(config_path)
     db_data = dbFuturesSimData()
-
-    # create system
     system = futures_do_system(config=config, data=db_data)
-
-    # calculate static performance (ignore output)
-    system.accounts.portfolio().percent
-
-    # calculate optimised performance (ignore output)
-    system.accounts.optimised_portfolio().percent
-
-    log.info(f"Start date for data: {system.data.start_date_for_data()}")
-
-    for instr in system.get_instrument_list():
-        log.info(
-            f"First date of raw prices for {instr}: "
-            f"{system.data.get_raw_price(instr).first_valid_index()}"
-        )
-
-    # first date for non zero position in a static system
-    for instr in system.get_instrument_list():
-        rounded = system.portfolio.accounts_stage.get_buffered_position(
-            instr, roundpositions=True
-        )
-        log.info(
-            f"First date for non zero static position in {instr}: "
-            f"{rounded.loc[rounded.ne(0)].first_valid_index()}"
-        )
-
-    optimised_positions = system.accounts.get_optimised_position_df()
-    for instr in system.get_instrument_list():
-        log.info(
-            f"First date for non zero optimised position in {instr}: "
-            f"{optimised_positions.loc[optimised_positions[instr].ne(0), instr].first_valid_index()}"
-        )
 
 
 def futures_do_system(
@@ -76,9 +53,11 @@ def futures_do_system(
 ):
     if data is arg_not_supplied:
         data = dbFuturesSimData()
+        # data = csvFuturesSimData()
 
     if config is arg_not_supplied:
-        config = Config("systems.jani.debug.debug_sim_config.yaml")
+        #config = Config("systems.jani.dynamic_system_jani_v1.yaml")
+        config = Config(DEFAULT_CONFIG)
 
     if trading_rules is arg_not_supplied:
         rules = Rules()
@@ -104,6 +83,31 @@ def futures_do_system(
     return system
 
 
+system = futures_do_system()
+portfolio = system.accounts.optimised_portfolio()
+portfolio_percent = system.accounts.portfolio().percent
+
+# performance
+
+system.config.use_SR_costs = False
+perf_unrounded = system.accounts.portfolio(roundpositions=False).percent
+perf_rounded = system.accounts.portfolio(roundpositions=True).percent
+perf_optimised = system.accounts.optimised_portfolio().percent
+
+performance = pd.concat([perf_unrounded.curve(), perf_rounded.curve(), perf_optimised.curve()], axis=1)
+performance.columns = ["unrounded", "rounded", "optimised"]
+
+print("Sim config file: ",DEFAULT_CONFIG)
+print("Start date: ",system.config.start_date)
+print("Notional trading capital: ",system.config.notional_trading_capital)
+print("Instruments: ",system.portfolio.get_instrument_list())
+print(f"Stats as %: {portfolio_percent.stats()}")
+
+performance.plot(figsize=(15,9), title="Performance")
+show()
+
+
+
 if __name__ == "__main__":
     args = None
     my_args = sys.argv
@@ -111,4 +115,5 @@ if __name__ == "__main__":
         config_path = sys.argv[1]
     else:
         config_path = DEFAULT_CONFIG
-    debug_system(config_path)
+    create_system(config_path)
+

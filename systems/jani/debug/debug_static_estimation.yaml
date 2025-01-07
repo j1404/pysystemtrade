@@ -1,0 +1,31 @@
+# YAML
+start_date: 2001-01-01
+
+instruments:
+  - PLAT
+  - SOYMEAL
+  - SP500_micro
+
+use_attenuation:
+   - 'breakout20'
+   - 'breakout40'
+
+trading_rules:
+  breakout20:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 20
+  breakout40:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 40
+
+forecast_cap: 20.0
+
+percentage_vol_target: 25.0
+notional_trading_capital: 500000
+base_currency: "USD"
