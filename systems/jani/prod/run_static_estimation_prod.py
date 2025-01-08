@@ -59,6 +59,11 @@ def run_system(load_pickle=False, write_pickle=False, do_estimate=False):
     # acc_portfolio_percent.curve().plot(legend=True)
     # show()
 
+    print("Static estimation")
+    print("Sim config file: ",CONFIG)
+    print("Start date: ",system.config.start_date)
+    print("Notional trading capital: ",system.config.notional_trading_capital)
+
     if write_pickle:
         write_pickle_file(system)
     if do_estimate:
@@ -76,7 +81,7 @@ def write_estimate_file(system):
     now = datetime.datetime.now()
     sysdiag = systemDiag(system)
     output_file = resolve_path_and_filename_for_package(
-        f"systems.jani.estimate-{now.strftime('%Y-%m-%d_%H%M%S')}.yaml"
+        f"systems.jani.prod.estimate-{now.strftime('%Y-%m-%d_%H%M%S')}.yaml"
     )
     print(f"writing estimate params to: {output_file}")
     estimates_needed = [

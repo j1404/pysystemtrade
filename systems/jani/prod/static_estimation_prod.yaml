@@ -1,5 +1,5 @@
 # YAML
-start_date: 1970-01-01
+start_date: 2004-01-01
 
 volatility_calculation:
   func: "sysquant.estimators.vol.mixed_vol_calc"
@@ -326,7 +326,7 @@ trading_rules:
 forecast_cap: 20.0
 
 percentage_vol_target: 25.0
-notional_trading_capital: 50000
+notional_trading_capital: 500000
 base_currency: "USD"
 
 instruments:
@@ -339,7 +339,7 @@ instruments:
   - MILLWHEAT
   - REDWHEAT
   - WHEAT
-  - WHEAT_ICE
+  # - WHEAT_ICE        #1970: Traceback: zero weight in optimisation of instrument weights as they have no positions
   - BBCOMM
   - GICS
   - FEEDCOW
@@ -394,7 +394,7 @@ instruments:
   - GAS_US_mini
   - GAS-PEN
   - BRENT_W
-  - CRUDE_ICE
+  # - CRUDE_ICE        #1970: Traceback: zero weight in optimisation of instrument weights as they have no positions
   - CRUDE_W_micro
   - GASOIL
   - GASOILINE
@@ -460,7 +460,7 @@ instruments:
   - EURO600
   - EUROSTX
   - FTSE100
-  - FTSE250
+  # - FTSE250          #1970: Traceback: zero weight in optimisation of instrument weights as they have no positions
   - SMI
   - DJSTX-SMALL
   - EUROSTX-SMALL
@@ -490,8 +490,8 @@ instruments:
   - BUXL
   - OAT
   - SHATZ
-  - EURIBOR-ICE
-  - SARONA
+  # - EURIBOR-ICE      #1970: Traceback: zero weight in optimisation of instrument weights as they have no positions
+  # - SARONA           #1970: Traceback: zero weight in optimisation of instrument weights as they have no positions
   # Metals
   - BITCOIN
   - ETHER-micro
