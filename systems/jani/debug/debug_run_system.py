@@ -1,7 +1,8 @@
 #
 # development system backtest
 #
-DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
+#DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
+DEFAULT_CONFIG = "systems.jani.debug.test_prod_165_100k_2014.yaml"
 
 import sys
 import datetime

@@ -1,8 +1,196 @@
 # YAML
-start_date: 2000-01-01
+start_date: 1970-01-01
+notional_trading_capital: 57000
+base_currency: "USD"
 
 instruments:
-  - SGX
+  -  CANOLA
+  -  CORN
+  -  OATIES
+  -  RICE
+  -  SOYBEAN_mini
+  -  SOYMEAL
+  -  SOYOIL
+  -  MILLWHEAT
+  -  REDWHEAT
+  -  WHEAT
+  #-  WHEAT_ICE      #Traceback: zero weight in optimisation of instrument weights as they have no positions
+  -  BBCOMM
+  -  GICS
+  -  FEEDCOW
+  -  LIVECOW
+  -  LEANHOG
+  -  COCOA
+  -  COCOA_LDN
+  -  COFFEE
+  -  ROBUSTA
+  -  COTTON2
+  -  BUTTER
+  -  CHEESE
+  -  MILK
+  -  MILKDRY
+  -  MILKWET
+  -  WHEY
+  -  OJ
+  -  RUBBER
+  -  SUGAR11
+  -  LUMBER-new
+  -  AUDJPY
+  -  CHFJPY
+  -  EURAUD
+  -  EURCAD
+  -  EURCHF
+  -  GBPCHF
+  -  GBPEUR
+  -  GBPJPY
+  -  YENEUR
+  -  CAD
+  -  DX
+  -  BRE
+  -  CLP
+  -  MXP
+  -  AUD_micro
+  -  JPY_mini
+  -  NZD
+  -  SGD
+  -  TWD
+  -  CNH
+  -  INR
+  -  KRWUSD_mini
+  -  CHF
+  -  EUR_micro
+  -  GBP
+  -  NOK
+  -  SEK
+  -  CZK
+  -  IRS
+  -  PLN
+  -  RUR
+  -  ZAR
+  -  COAL
+  -  COAL-GEORDIE
+  -  EUA
+  -  GAS_US_mini
+  -  GAS-PEN
+  -  BRENT_W
+  #-  CRUDE_ICE      #Traceback: zero weight in optimisation of instrument weights as they have no positions
+  -  CRUDE_W_micro
+  -  GASOIL
+  -  GASOILINE
+  -  HEATOIL
+  -  US-DISCRETE
+  -  US-ENERGY
+  -  US-FINANCE
+  -  US-HEALTH
+  -  US-INDUSTRY
+  -  US-MATERIAL
+  -  US-PROPERTY
+  -  US-REALESTATE
+  -  US-STAPLES
+  -  US-TECH
+  -  US-UTILS
+  -  DOW
+  -  FANG
+  -  NASDAQ_micro
+  -  R1000
+  -  SP500_micro
+  -  RUSSELL
+  -  SP400
+  -  BOVESPA
+  -  JP-REALESTATE
+  -  FTSETAIWAN
+  -  MSCISING
+  -  MSCITAIWAN
+  -  NIKKEI
+  -  NIKKEI400
+  -  SGX
+  -  SPI200
+  -  MUMMY
+  -  HANGTECH
+  -  CHINAA-CON
+  -  FTSECHINAA
+  -  FTSECHINAH
+  -  FTSEVIET
+  -  HANG_mini
+  -  HANGENT_mini
+  -  KOSDAQ
+  -  KOSPI_mini
+  -  MSCIEMASIA
+  -  EU-AUTO
+  -  EU-BANKS
+  -  EU-BASIC
+  -  EU-CHEM
+  -  EU-CONSTRUCTION
+  -  EU-DJ-TELECOM
+  -  EU-FOOD
+  -  EU-HEALTH
+  -  EU-HOUSE
+  -  EU-INSURE
+  -  EU-MEDIA
+  -  EU-MID
+  -  EU-OIL
+  -  EU-REALESTATE
+  -  EU-RETAIL
+  -  EU-TECH
+  -  EU-TRAVEL
+  -  EU-UTILS
+  -  AEX
+  -  CAC
+  -  DAX
+  -  EU-DIV30
+  -  EURO600
+  -  EUROSTX
+  -  FTSE100
+  #-  FTSE250      #Traceback: zero weight in optimisation of instrument weights as they have no positions
+  -  OMX
+  -  SMI
+  -  SWISSLEAD
+  -  SMI-MID
+  -  DJSTX-SMALL
+  -  EUROSTX-SMALL
+  -  MSCIEAFA
+  -  MSCIWORLD
+  -  CAD10
+  -  CAD2
+  -  CAD5
+  -  US10
+  -  US10U
+  -  US2
+  -  US20
+  -  US3
+  -  US30
+  -  US5
+  -  FED
+  -  SOFR
+  -  JGB
+  -  JGB-SGX-mini
+  -  KR10
+  -  KR3
+  -  BOBL
+  -  BONO
+  -  BTP
+  -  BTP3
+  -  BUND
+  -  BUXL
+  -  CH10
+  -  OAT
+  -  SHATZ
+  #-  EURIBOR-ICE   #Traceback: zero weight in optimisation of instrument weights as they have no positions
+  #-  SARONA        #Traceback: zero weight in optimisation of instrument weights as they have no positions
+  -  BITCOIN
+  -  ETHER-micro
+  -  ALUMINIUM
+  -  COPPER-micro
+  -  IRON
+  -  STEEL
+  -  GOLD_micro
+  -  PALLAD
+  -  PLAT
+  -  SILVER
+  -  VIX_mini
+  -  VNKI
+  -  V2X
+
 
 volatility_calculation:
   func: "sysquant.estimators.vol.mixed_vol_calc"
@@ -327,10 +515,7 @@ trading_rules:
          Lfast: 64
 
 forecast_cap: 20.0
-
 percentage_vol_target: 25.0
-notional_trading_capital: 500000
-base_currency: "EUR"
 
 
 exclude_instrument_lists:
@@ -344,6 +529,9 @@ exclude_instrument_lists:
   #
   # REVIEW REGULARLY AND CHECK THESE INSTRUMENTS AREN'T BETTER ELSEWHERE...
   ignore_instruments:
+    - IG
+    - GILT
+    - SUGAR_WHITE
 
 
   #
@@ -354,6 +542,9 @@ exclude_instrument_lists:
   # NOTE: This will be regionally biased, you will probably want to override this in private_config.yaml
   #
   trading_restrictions:
+    - BITCOIN
+    - ETHEREUM
+    - ETHER-micro
 
   # These are markets that are too expensive or illiquid to actually trade
   # For the dynamically optimised strategy this list will be used in sim as 'don't trade'
@@ -362,4 +553,95 @@ exclude_instrument_lists:
   # Run interactive controls to get a list of suggested markets here
   # To override this list, change in sim .yaml config (sim) and private_config.yaml (production)
   bad_markets:
+    - AUDJPY
+    - BB3M
+    - BBCOMM
+    - BOBL
+    - BONO
+    - BOVESPA
+    - BTP3
+    - BUTTER
+    - CAD_micro
+    - CAD2
+    - CAD5
+    - CH10
+    - CHF_micro
+    - CHFJPY
+    - CLP
+    - CNH
+    - CNH-onshore
+    - COAL
+    - COAL-GEORDIE
+    - CORN_mini
+    - COPPER_LME
+    - CORN_mini
+    - COTTON
+    - CZK
+    - DJSTX-SMALL
+    - EPRA-EUROPE
+    - ETHANOL
+    - EU-CHEM
+    - EU-CONSTRUCTION
+    - EU-DJ-OIL
+    - EU-DJ-TECH
+    - EU-DJ-TELECOM
+    - EU-DJ-UTIL
+    - EU-FOOD
+    - EU-HOUSE
+    - EU-INSURE
+    - EU-MEDIA
+    - EU-MID
+    - EU-RETAIL
+    - EU-TRAVEL
+    - EURAUD
+    - EURCAD
+    - EURCHF
+    - EURIBOR
+    - EURIBOR-ICE
+    - EUROSTX-LARGE
+    - EUROSTX-SMALL
+    - EUROSTX200-LARGE
+    - FED
+    - FTSEINDO
+    - FTSEVIET
+    - GASOILINE_micro
+    - GBP_micro
+    - GBPJPY
+    - GICS
+    - HIGHYIELD
+    - HOUSE-US
+    - IG
+    - INR
+    - IRS
+    - JGB
+    - JGB-SGX-mini
+    - JP-REALESTATE
+    - KR3
+    - MILKDRY
+    - MILKWET
+    - MSCIEMASIA
+    - MSCIWORLD
+    - OMX
+    - PLN
+    - RUR
+    - SARONA
+    - SGD
+    - SGD_mini
+    - SGX
+    - SHATZ
+    - SMI-MID
+    - SOFR
+    - SONIA3
+    - STEEL
+    - SUGAR16
+    - SWISSLEAD
+    - TIN_LME
+    - TWD
+    - US2
+    - US3
+    - US5
+    - VNKI
+    - WHEAT_ICE
+    - WHEAT_mini
+    - WHEY
 
