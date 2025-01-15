@@ -1,5 +1,8 @@
 # YAML
-start_date: 2000-01-01
+# EURUSD start date 1999-09-06
+start_date: 2020-01-01
+notional_trading_capital: 57000
+base_currency: "USD"
 
 volatility_calculation:
   func: "sysquant.estimators.vol.mixed_vol_calc"
@@ -324,22 +327,15 @@ trading_rules:
          Lfast: 64
 
 forecast_cap: 20.0
-
 percentage_vol_target: 25.0
-notional_trading_capital: 57000
-base_currency: "EUR"
 
 instruments:
   # Agricultural
   - CANOLA
   - CORN
   - SOYBEAN_mini
-  - SOYMEAL
-  - SOYOIL
   - MILLWHEAT
-  - REDWHEAT
   - WHEAT
-  - BBCOMM
   - FEEDCOW
   - LIVECOW
   - LEANHOG
@@ -348,8 +344,6 @@ instruments:
   - RUBBER
   - SUGAR11
   # Currencies
-  - EURCHF
-  - GBPEUR
   - YENEUR
   - CAD
   - BRE
@@ -357,61 +351,39 @@ instruments:
   - AUD_micro
   - JPY_mini
   - NZD
-  - SGD
   - CNH
-  - INR
   - CHF
   - EUR_micro
   - GBP
-  - ZAR
+  - SEK
   # Energy
   - GAS_US_mini
   - CRUDE_W_micro
+  - GASOILINE
+  - HEATOIL
   # Equity
-  - US-STAPLES
   - DOW
   - NASDAQ_micro
-  - R1000
   - SP500_micro
   - RUSSELL
   - MSCISING
   - NIKKEI
-  - NIKKEI400
-  - MUMMY
   - FTSECHINAA
-  - HANG_mini
-  - HANGENT_mini
   - KOSPI_mini
-  - EU-AUTO
   - EU-BANKS
-  - EU-OIL
-  - EU-REALESTATE
-  - EU-TRAVEL
-  - EU-UTILS
-  - AEX
   - CAC
   - DAX
-  - EU-DIV30
-  - EURO600
   - EUROSTX
-  - FTSE250
-  - SMI
-  - DJSTX-SMALL
   # Interest Rates
-  - CAD10
   - US10
-  - US10U
   - US2
   - US20
   - US5
-  - SOFR
   - JGB-SGX-mini
   - KR10
-  - KR3
   - BOBL
   - BONO
   - BTP
-  - BTP3
   - BUND
   - OAT
   - SHATZ
@@ -419,11 +391,9 @@ instruments:
   - BITCOIN
   - COPPER-micro
   - IRON
-  - STEEL
   - GOLD_micro
   - PALLAD
   - PLAT
-  - SILVER
   # Volatility
   - VIX_mini
   - V2X

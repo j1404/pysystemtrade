@@ -1,7 +1,7 @@
 #
-# development system backtest
+# production system backtest
 #
-DEFAULT_CONFIG = "systems.jani.dev.sim_config_dev.yaml"
+DEFAULT_CONFIG = "systems.jani.prod.dynamic_system_jani_v2.yaml"
 
 import sys
 import datetime
@@ -129,6 +129,7 @@ costs_v_perf = pd.concat([optimised.curve(), costs], axis=1)
 costs_v_perf.columns = ["Net performance %", "Costs (x -1.0)"]
 costs_v_perf.plot(figsize=(15,9))
 show()
+
 
 
 if __name__ == "__main__":

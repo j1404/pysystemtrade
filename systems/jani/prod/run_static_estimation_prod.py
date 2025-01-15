@@ -1,8 +1,8 @@
 #
 # static system to estimate weights
 #
-CONFIG = "systems.jani.prod.static_estimation.yaml"
-SAVED_SYSTEM = "systems.jani.prod.static_estimation.pck"
+CONFIG = "systems.jani.prod.static_estimation_prod.yaml"
+SAVED_SYSTEM = "systems.jani.prod.static_estimation_prod.pck"
 
 import datetime
 import yaml
@@ -53,11 +53,15 @@ def run_system(load_pickle=False, write_pickle=False, do_estimate=False):
 
     acc_portfolio_percent = system.accounts.portfolio().percent
 
-    log.info(f"Stats: {acc_portfolio_percent.stats()}")
+    #log.info(f"Stats: {acc_portfolio_percent.stats()}")
     log.info(f"Stats as %: {acc_portfolio_percent.stats()}\n")
-
     # acc_portfolio_percent.curve().plot(legend=True)
     # show()
+
+    print("Static estimation")
+    print("Sim config file: ",CONFIG)
+    print("Start date: ",system.config.start_date)
+    print("Notional trading capital: ",system.config.notional_trading_capital)
 
     if write_pickle:
         write_pickle_file(system)
@@ -76,7 +80,7 @@ def write_estimate_file(system):
     now = datetime.datetime.now()
     sysdiag = systemDiag(system)
     output_file = resolve_path_and_filename_for_package(
-        f"systems.jani.estimate-{now.strftime('%Y-%m-%d_%H%M%S')}.yaml"
+        f"systems.jani.prod.estimate-prod-{now.strftime('%Y-%m-%d_%H%M%S')}.yaml"
     )
     print(f"writing estimate params to: {output_file}")
     estimates_needed = [
@@ -107,7 +111,8 @@ def jani_system(
         data = dbFuturesSimData()
 
     if config is arg_not_supplied:
-        config = Config("systems.jani.dynamic_system_jani_v1.yaml")
+        #config = Config("systems.jani.dynamic_system_jani_v1.yaml")
+        config = Config(CONFIG)
 
     rules = Rules(trading_rules)
 

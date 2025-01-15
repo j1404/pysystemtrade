@@ -8,7 +8,7 @@ mapping_dict = dict(
     #    KOSPI="KOSPI_mini",
     #    EUR="EUR_micro",
     #    HANGENT="HANGENT_mini",
-    # 	 KRWUSD="KRWUSD_mini",
+    KRWUSD="KRWUSD_mini",
     # 	 SOYBEAN="SOYBEAN_mini",
     # 	 VIX="VIX_mini",
     # 	 JPY="JPY_mini",
@@ -19,7 +19,7 @@ mapping_dict = dict(
     #    NASDAQ="NASDAQ_micro",
     #    IBEX="IBEX_mini",
     # 	 HANG="HANG_mini",
-    ETHEREUM="ETHER-micro",
+    #    ETHEREUM="ETHER-micro",
 )
 
 
