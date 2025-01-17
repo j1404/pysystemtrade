@@ -414,7 +414,8 @@ trading_rules:
          Lfast: 64
 
 forecast_cap: 20.0
-percentage_vol_target: 25.0
+#percentage_vol_target: 25.0
+percentage_vol_target: 15.0
 
 
 exclude_instrument_lists:
