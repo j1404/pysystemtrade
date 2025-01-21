@@ -1,6 +1,6 @@
 # YAML
 start_date: 1970-01-01
-notional_trading_capital: 57000
+notional_trading_capital: 200000
 base_currency: "USD"
 
 instruments:
@@ -415,7 +415,7 @@ trading_rules:
 
 forecast_cap: 20.0
 #percentage_vol_target: 25.0
-percentage_vol_target: 15.0
+percentage_vol_target: 10.0
 
 
 exclude_instrument_lists:

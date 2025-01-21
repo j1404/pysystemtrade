@@ -49,7 +49,7 @@ def quick_backup_of_all_price_data_including_expired():
     # backup only current contracts
     backup_futures_contract_prices_to_csv(backup_data, ignore_long_expired=True)
     # backup also expired contracts
-    #backup_futures_contract_prices_to_csv(backup_data, ignore_long_expired=False)
+    # backup_futures_contract_prices_to_csv(backup_data, ignore_long_expired=False)
 
 
 class backupDbToCsv:

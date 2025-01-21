@@ -53,15 +53,15 @@ def run_system(load_pickle=False, write_pickle=False, do_estimate=False):
 
     acc_portfolio_percent = system.accounts.portfolio().percent
 
-    #log.info(f"Stats: {acc_portfolio_percent.stats()}")
+    # log.info(f"Stats: {acc_portfolio_percent.stats()}")
     log.info(f"Stats as %: {acc_portfolio_percent.stats()}\n")
     # acc_portfolio_percent.curve().plot(legend=True)
     # show()
 
     print("Static estimation")
-    print("Sim config file: ",CONFIG)
-    print("Start date: ",system.config.start_date)
-    print("Notional trading capital: ",system.config.notional_trading_capital)
+    print("Sim config file: ", CONFIG)
+    print("Start date: ", system.config.start_date)
+    print("Notional trading capital: ", system.config.notional_trading_capital)
 
     if write_pickle:
         write_pickle_file(system)
@@ -111,7 +111,7 @@ def jani_system(
         data = dbFuturesSimData()
 
     if config is arg_not_supplied:
-        #config = Config("systems.jani.dynamic_system_jani_v1.yaml")
+        # config = Config("systems.jani.dynamic_system_jani_v1.yaml")
         config = Config(CONFIG)
 
     rules = Rules(trading_rules)

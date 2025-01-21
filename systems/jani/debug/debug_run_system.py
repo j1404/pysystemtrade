@@ -1,7 +1,7 @@
 #
 # development system backtest
 #
-#DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
+# DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
 DEFAULT_CONFIG = "systems.jani.debug.test_prod_165_100k_2014.yaml"
 
 import sys
@@ -10,6 +10,7 @@ import pandas as pd
 from matplotlib.pyplot import show
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 from syscore.constants import arg_not_supplied
@@ -41,7 +42,7 @@ def create_system(config_path=None):
     if config_path is None:
         config_path = DEFAULT_CONFIG
 
-    #log.info(f"Building system from {config_path}")
+    # log.info(f"Building system from {config_path}")
     config = Config(config_path)
     db_data = dbFuturesSimData()
     system = futures_do_system(config=config, data=db_data)
@@ -57,7 +58,7 @@ def futures_do_system(
         # data = csvFuturesSimData()
 
     if config is arg_not_supplied:
-        #config = Config("systems.jani.dynamic_system_jani_v1.yaml")
+        # config = Config("systems.jani.dynamic_system_jani_v1.yaml")
         config = Config(DEFAULT_CONFIG)
 
     if trading_rules is arg_not_supplied:
@@ -95,18 +96,19 @@ perf_unrounded = system.accounts.portfolio(roundpositions=False).percent
 perf_rounded = system.accounts.portfolio(roundpositions=True).percent
 perf_optimised = system.accounts.optimised_portfolio().percent
 
-performance = pd.concat([perf_unrounded.curve(), perf_rounded.curve(), perf_optimised.curve()], axis=1)
+performance = pd.concat(
+    [perf_unrounded.curve(), perf_rounded.curve(), perf_optimised.curve()], axis=1
+)
 performance.columns = ["unrounded", "rounded", "optimised"]
 
-print("Sim config file: ",DEFAULT_CONFIG)
-print("Start date: ",system.config.start_date)
-print("Notional trading capital: ",system.config.notional_trading_capital)
-print("Instruments: ",system.portfolio.get_instrument_list())
+print("Sim config file: ", DEFAULT_CONFIG)
+print("Start date: ", system.config.start_date)
+print("Notional trading capital: ", system.config.notional_trading_capital)
+print("Instruments: ", system.portfolio.get_instrument_list())
 print(f"Stats as %: {portfolio_percent.stats()}")
 
-performance.plot(figsize=(15,9), title="Performance")
+performance.plot(figsize=(15, 9), title="Performance")
 show()
-
 
 
 if __name__ == "__main__":
@@ -117,4 +119,3 @@ if __name__ == "__main__":
     else:
         config_path = DEFAULT_CONFIG
     create_system(config_path)
-
