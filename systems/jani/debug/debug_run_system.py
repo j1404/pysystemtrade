@@ -140,7 +140,6 @@ costs_v_perf.plot(figsize=(15, 9))
 show()
 
 
-
 if __name__ == "__main__":
     args = None
     my_args = sys.argv

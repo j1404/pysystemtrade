@@ -1,8 +1,8 @@
 #
 # development system backtest
 #
-#DEFAULT_CONFIG = "systems.jani.dev.test_prod_100_100k.yaml"
-#DEFAULT_CONFIG = "systems.jani.dev.test_prod_60_57k.yaml"
+# DEFAULT_CONFIG = "systems.jani.dev.test_prod_100_100k.yaml"
+# DEFAULT_CONFIG = "systems.jani.dev.test_prod_60_57k.yaml"
 DEFAULT_CONFIG = "systems.jani.dev.test_prod_60_100k.yaml"
 
 import sys
