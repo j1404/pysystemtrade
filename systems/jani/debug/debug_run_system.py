@@ -2,7 +2,7 @@
 # development system backtest
 #
 # DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
-DEFAULT_CONFIG = "systems.jani.debug.test_prod_165_100k_2014.yaml"
+DEFAULT_CONFIG = "systems.jani.debug.test_16neg_57k_1999.yaml"
 
 import sys
 import datetime
@@ -104,11 +104,41 @@ performance.columns = ["unrounded", "rounded", "optimised"]
 print("Sim config file: ", DEFAULT_CONFIG)
 print("Start date: ", system.config.start_date)
 print("Notional trading capital: ", system.config.notional_trading_capital)
+print("Volatility target: ", system.config.percentage_vol_target)
 print("Instruments: ", system.portfolio.get_instrument_list())
 print(f"Stats as %: {portfolio_percent.stats()}")
 
 performance.plot(figsize=(15, 9), title="Performance")
 show()
+
+# summary stats
+
+corr = pd.concat([perf_unrounded.curve(), perf_optimised.curve()], axis=1)
+sharpe_gross = system.accounts.optimised_portfolio().gross.sharpe()
+sharpe_net = system.accounts.optimised_portfolio().net.sharpe()
+sr_cost_loss = sharpe_gross - sharpe_net
+turnover = system.accounts.total_portfolio_level_turnover()
+
+print(
+    f"Unrounded v optimised portfolio returns correlation: {round(corr.corr().iloc[0, 1], 5)}"
+)
+print(f"Sharpe gross: {round(sharpe_gross, 3)}")
+print(f"Sharpe net: {round(sharpe_net, 3)}")
+print(
+    f"Sharpe gross net difference: {round(sr_cost_loss, 3)} (or, in basis points: ~{round(sr_cost_loss * 100)})"
+)
+print(f"Portfolio level turnover: {round(turnover, 2)}")
+
+# costs v performance
+
+optimised = system.accounts.optimised_portfolio().percent.net
+costs = optimised.costs.curve()
+costs = costs * -10
+costs_v_perf = pd.concat([optimised.curve(), costs], axis=1)
+costs_v_perf.columns = ["Net performance %", "Costs (x -1.0)"]
+costs_v_perf.plot(figsize=(15, 9))
+show()
+
 
 
 if __name__ == "__main__":

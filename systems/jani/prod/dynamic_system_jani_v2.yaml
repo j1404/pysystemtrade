@@ -2,7 +2,7 @@
 # EURUSD start date 1999-09-06
 #start_date: 1970-01-01
 
-# SIM config prod
+# SIM config prod v2
 
 # all estimates set to False in dynamic system
 use_forecast_weight_estimates: False
@@ -359,6 +359,8 @@ risk_overlay:
   max_risk_limit_sum_abs_risk: 3.4
   max_risk_leverage: 13
 
+# set this to 0.13 to enforce the speed limit even for fixed weights or regardless of what an estimator does
+forecast_post_ceiling_cost_SR: 0.13
 
 # from static estimation: instrument_div_multiplier, instrument_weights, forecast_scalars, forecast_weights, forecast_div_multiplier
 # weights from test_prod_60_57kUSD_1970.yaml

@@ -1,7 +1,8 @@
 #
 # static system to estimate weights
 #
-CONFIG = "systems.jani.debug.debug_static_estimation.yaml"
+#CONFIG = "systems.jani.debug.debug_static_estimation.yaml"
+CONFIG = "systems.jani.debug.static_estimation_debug_neg.yaml"
 SAVED_SYSTEM = ""
 
 import datetime
