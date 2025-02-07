@@ -1,7 +1,7 @@
 #
 # development system backtest
 #
-#DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
+# DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
 DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config_1970.yaml"
 
 import sys
@@ -103,7 +103,11 @@ performance.columns = ["unrounded", "rounded", "optimised"]
 
 print("Sim config file: ", DEFAULT_CONFIG)
 print("Start date: ", system.config.start_date)
-print("Notional trading capital: ",system.config.notional_trading_capital,system.config.base_currency)
+print(
+    "Notional trading capital: ",
+    system.config.notional_trading_capital,
+    system.config.base_currency,
+)
 print("Volatility target: ", system.config.percentage_vol_target)
 print("Instruments: ", system.portfolio.get_instrument_list())
 print(f"Stats as %: {portfolio_percent.stats()}")
@@ -140,18 +144,18 @@ for instr in system.portfolio.get_instrument_list():
     optimised = system.accounts.get_optimised_position_df()[instr]
     pos = pd.concat([unrounded, rounded, optimised], axis=1)
     pos.columns = ["unrounded", "rounded", "optimised"]
-    pos.plot(figsize=(15,9), title=f"Positions {instr}")
+    pos.plot(figsize=(15, 9), title=f"Positions {instr}")
     show()
 
 
 # costs v performance
-#optimised = system.accounts.optimised_portfolio().percent.net
-#costs = optimised.costs.curve()
-#costs = costs * -10
-#costs_v_perf = pd.concat([optimised.curve(), costs], axis=1)
-#costs_v_perf.columns = ["Net performance %", "Costs (x -1.0)"]
-#costs_v_perf.plot(figsize=(15, 9))
-#show()
+# optimised = system.accounts.optimised_portfolio().percent.net
+# costs = optimised.costs.curve()
+# costs = costs * -10
+# costs_v_perf = pd.concat([optimised.curve(), costs], axis=1)
+# costs_v_perf.columns = ["Net performance %", "Costs (x -1.0)"]
+# costs_v_perf.plot(figsize=(15, 9))
+# show()
 
 
 if __name__ == "__main__":

@@ -102,7 +102,11 @@ performance.columns = ["unrounded", "rounded", "optimised"]
 
 print("Sim config file: ", DEFAULT_CONFIG)
 print("Start date: ", system.config.start_date)
-print("Notional trading capital: ",system.config.notional_trading_capital,system.config.base_currency)
+print(
+    "Notional trading capital: ",
+    system.config.notional_trading_capital,
+    system.config.base_currency,
+)
 print("Volatility target: ", system.config.percentage_vol_target)
 print("Instruments: ", system.portfolio.get_instrument_list())
 print(f"Stats as %: {portfolio_percent.stats()}")
