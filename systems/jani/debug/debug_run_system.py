@@ -1,8 +1,8 @@
 #
 # development system backtest
 #
-# DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
-DEFAULT_CONFIG = "systems.jani.debug.test_16neg_57k_1999.yaml"
+#DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config.yaml"
+DEFAULT_CONFIG = "systems.jani.debug.debug_sim_config_1970.yaml"
 
 import sys
 import datetime
@@ -103,22 +103,19 @@ performance.columns = ["unrounded", "rounded", "optimised"]
 
 print("Sim config file: ", DEFAULT_CONFIG)
 print("Start date: ", system.config.start_date)
-print("Notional trading capital: ", system.config.notional_trading_capital)
+print("Notional trading capital: ",system.config.notional_trading_capital,system.config.base_currency)
 print("Volatility target: ", system.config.percentage_vol_target)
 print("Instruments: ", system.portfolio.get_instrument_list())
 print(f"Stats as %: {portfolio_percent.stats()}")
 
 performance.plot(figsize=(15, 9), title="Performance")
-show()
 
 # summary stats
-
 corr = pd.concat([perf_unrounded.curve(), perf_optimised.curve()], axis=1)
 sharpe_gross = system.accounts.optimised_portfolio().gross.sharpe()
 sharpe_net = system.accounts.optimised_portfolio().net.sharpe()
 sr_cost_loss = sharpe_gross - sharpe_net
 turnover = system.accounts.total_portfolio_level_turnover()
-
 print(
     f"Unrounded v optimised portfolio returns correlation: {round(corr.corr().iloc[0, 1], 5)}"
 )
@@ -129,15 +126,32 @@ print(
 )
 print(f"Portfolio level turnover: {round(turnover, 2)}")
 
-# costs v performance
-
-optimised = system.accounts.optimised_portfolio().percent.net
-costs = optimised.costs.curve()
-costs = costs * -10
-costs_v_perf = pd.concat([optimised.curve(), costs], axis=1)
-costs_v_perf.columns = ["Net performance %", "Costs (x -1.0)"]
-costs_v_perf.plot(figsize=(15, 9))
+# print performance plot
 show()
+
+# positions plots
+for instr in system.portfolio.get_instrument_list():
+    unrounded = system.portfolio.accounts_stage.get_buffered_position(
+        instr, roundpositions=False
+    )
+    rounded = system.portfolio.accounts_stage.get_buffered_position(
+        instr, roundpositions=True
+    )
+    optimised = system.accounts.get_optimised_position_df()[instr]
+    pos = pd.concat([unrounded, rounded, optimised], axis=1)
+    pos.columns = ["unrounded", "rounded", "optimised"]
+    pos.plot(figsize=(15,9), title=f"Positions {instr}")
+    show()
+
+
+# costs v performance
+#optimised = system.accounts.optimised_portfolio().percent.net
+#costs = optimised.costs.curve()
+#costs = costs * -10
+#costs_v_perf = pd.concat([optimised.curve(), costs], axis=1)
+#costs_v_perf.columns = ["Net performance %", "Costs (x -1.0)"]
+#costs_v_perf.plot(figsize=(15, 9))
+#show()
 
 
 if __name__ == "__main__":
