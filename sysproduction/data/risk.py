@@ -105,8 +105,9 @@ def get_perc_returns_across_instruments(data, instrument_list: list) -> pd.DataF
 
     perc_returns = dict(
         [
-            (instrument_code, get_daily_perc_returns_for_risk(data, instrument_code))
-            for instrument_code in instrument_list
+            (instr, returns)
+            for instr in instrument_list
+            if len(returns := get_daily_perc_returns_for_risk(data, instr)) > 0
         ]
     )
     price_df = pd.DataFrame(perc_returns)
