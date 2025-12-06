@@ -90,8 +90,9 @@ portfolio_percent = system.accounts.portfolio().percent
 
 # risk debug
 log.info(f"Config loaded - small_system: {system.config.small_system}")
-log.info(f"Max risk per instrument setting: {system.config.small_system.get('max_risk_per_instrument', 'NOT FOUND')}")
-
+log.info(
+    f"Max risk per instrument setting: {system.config.small_system.get('max_risk_per_instrument', 'NOT FOUND')}"
+)
 
 
 # performance

@@ -112,9 +112,9 @@ max_dd = drawdown_series.min()
 print(f"Maximum Drawdown: {max_dd:.2%}")
 
 # Print all available methods
-#print("Available methods on optimised_portfolio:")
-#methods = [m for m in dir(perf_optimised) if not m.startswith('_')]
-#for m in sorted(methods):
+# print("Available methods on optimised_portfolio:")
+# methods = [m for m in dir(perf_optimised) if not m.startswith('_')]
+# for m in sorted(methods):
 #    print(f"  - {m}")
 
 # Capital is a property, not a method - no ()
@@ -138,9 +138,6 @@ print(f"Initial Capital: {initial_capital:.0f} EUR")
 print(f"Minimum Capital: {min_capital:.0f} EUR")
 print(f"Maximum Capital: {perf_optimised.capital.max():.0f} EUR")
 print(f"Max Drawdown in Capital: {max_capital_drawdown_pct:.1f}%")
-
-
-
 
 
 performance.plot(figsize=(15, 9), title="Performance")
