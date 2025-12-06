@@ -106,6 +106,43 @@ print("Notional trading capital: ", system.config.notional_trading_capital)
 print("Instruments: ", system.portfolio.get_instrument_list())
 print(f"Stats as %: {portfolio_percent.stats()}")
 
+
+drawdown_series = perf_optimised.drawdown()
+max_dd = drawdown_series.min()
+print(f"Maximum Drawdown: {max_dd:.2%}")
+
+# Print all available methods
+#print("Available methods on optimised_portfolio:")
+#methods = [m for m in dir(perf_optimised) if not m.startswith('_')]
+#for m in sorted(methods):
+#    print(f"  - {m}")
+
+# Capital is a property, not a method - no ()
+print("Capital over time:")
+print(perf_optimised.capital)
+
+print("\nCapital stats:")
+print(f"Min: {perf_optimised.capital.min():.0f}")
+print(f"Max: {perf_optimised.capital.max():.0f}")
+print(f"Mean: {perf_optimised.capital.mean():.0f}")
+
+# Margin utilization estimate
+initial_capital = 40000
+min_capital = perf_optimised.capital.min()
+max_capital_drawdown_pct = (1 - (min_capital / initial_capital)) * 100
+print(f"\nCapital drawdown from peak: {max_capital_drawdown_pct:.1f}%")
+
+# Full reporting code
+print(f"\n=== MARGIN & CAPITAL ===")
+print(f"Initial Capital: {initial_capital:.0f} EUR")
+print(f"Minimum Capital: {min_capital:.0f} EUR")
+print(f"Maximum Capital: {perf_optimised.capital.max():.0f} EUR")
+print(f"Max Drawdown in Capital: {max_capital_drawdown_pct:.1f}%")
+
+
+
+
+
 performance.plot(figsize=(15, 9), title="Performance")
 show()
 

@@ -1,7 +1,7 @@
 #
 # production system backtest
 #
-DEFAULT_CONFIG = "systems.jani.prod.dynamic_system_jani_v2.yaml"
+DEFAULT_CONFIG = "systems.jani.prod.dynamic_v7.yaml"
 
 import sys
 import datetime
@@ -90,7 +90,7 @@ portfolio_percent = system.accounts.portfolio().percent
 
 # performance
 
-system.config.use_SR_costs = False
+system.config.use_SR_costs = True
 perf_unrounded = system.accounts.portfolio(roundpositions=False).percent
 perf_rounded = system.accounts.portfolio(roundpositions=True).percent
 perf_optimised = system.accounts.optimised_portfolio().percent

@@ -1,7 +1,7 @@
 #
 # development system backtest
 #
-DEFAULT_CONFIG = "systems.jani.dev.test_prod_80B_500k_v2.yaml"
+DEFAULT_CONFIG = "systems.jani.dev.dynamic_v7_dev7.yaml"
 
 import sys
 import datetime
@@ -87,6 +87,12 @@ def futures_do_system(
 system = futures_do_system()
 portfolio = system.accounts.optimised_portfolio()
 portfolio_percent = system.accounts.portfolio().percent
+
+# risk debug
+log.info(f"Config loaded - small_system: {system.config.small_system}")
+log.info(f"Max risk per instrument setting: {system.config.small_system.get('max_risk_per_instrument', 'NOT FOUND')}")
+
+
 
 # performance
 

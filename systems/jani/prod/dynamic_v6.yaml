@@ -1,0 +1,230 @@
+#YAML
+# EURUSD start date 1999-09-06
+# 20 years of data for estimators
+# define start date once, never change
+start_date: 2005-01-01
+
+# v6
+
+# all dynamic estimators turned on
+use_forecast_weight_estimates: True
+use_forecast_div_mult_estimates: True
+use_instrument_weight_estimates: True
+use_instrument_div_mult_estimates: True
+use_forecast_scale_estimates: True
+
+volatility_calculation:
+  func: "sysquant.estimators.vol.mixed_vol_calc"
+  days: 35
+  min_periods: 10
+  vol_abs_min: 0.0000000001
+  slow_vol_years: 20
+  proportion_of_slow_vol: 0.35
+  backfill: True
+#
+
+trading_rules:
+  breakout20:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 20
+  breakout80:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 80
+  breakout160:
+     function: systems.provided.rules.breakout.breakout
+     data:
+         - "rawdata.get_daily_prices"
+     other_args:
+       lookback: 160
+  relmomentum40:
+     function: systems.provided.rules.rel_mom.relative_momentum
+     data:
+         - "rawdata.get_cumulative_daily_vol_normalised_returns"
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+       horizon: 40
+  carry30:
+     function: systems.provided.rules.carry.carry
+     data:
+         - "rawdata.raw_carry"
+     other_args:
+         smooth_days: 30
+  assettrend4:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+         Lfast: 4
+         Lslow: 16
+  assettrend8:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+         Lfast: 8
+         Lslow: 32
+  assettrend16:
+     function: systems.provided.rules.ewmac.ewmac_calc_vol
+     data:
+         - "rawdata.normalised_price_for_asset_class"
+     other_args:
+         Lfast: 16
+         Lslow: 64
+  momentum8:
+     function: systems.provided.rules.ewmac.ewmac
+     data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+     other_args:
+         Lfast: 8
+         Lslow: 32
+  momentum16:
+     function: systems.provided.rules.ewmac.ewmac
+     data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+     other_args:
+         Lfast: 16
+         Lslow: 64
+  momentum32:
+     function: systems.provided.rules.ewmac.ewmac
+     data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+     other_args:
+         Lfast: 32
+         Lslow: 128
+  accel32:
+    function: systems.provided.rules.accel.accel
+    data:
+         - "rawdata.get_daily_prices"
+         - "rawdata.daily_returns_volatility"
+    other_args:
+         Lfast: 32
+
+use_attenuation:
+  - momentum8
+  - momentum16
+  - breakout20
+  - breakout80
+  - assettrend4
+  - assettrend8
+  - accel32
+  - relmomentum40
+
+forecast_cap: 20.0
+
+percentage_vol_target: 15.0
+
+# initial capital 01-2025, do not change ever!
+notional_trading_capital: 56760.8
+base_currency: "EUR"
+
+# https://qoppac.blogspot.com/2022/02/exogenous-risk-overlay-take-two.html
+# default
+risk_overlay:
+  max_risk_fraction_normal_risk: 1.75
+  max_risk_fraction_stdev_risk: 4.0
+  max_risk_limit_sum_abs_risk: 4.0
+  max_risk_leverage: 20.0
+
+# set this to 0.13 to enforce the speed limit even for fixed weights or regardless of what an estimator does
+forecast_post_ceiling_cost_SR: 0.13
+
+# removed from fully dynamic system
+# instrument_div_multiplier:
+# forecast_div_multiplier:
+
+# instrument weights, needed for universe declaration
+# from static estimation, can also be equal weights
+instrument_weights:
+  AUD_micro: 0.015085268093502108
+  BITCOIN: 0.01278186113453869
+  BRE: 0.023898682210508657
+  BTP: 0.08510713302555424
+  BUND: 0.047612786614103814
+  CAD10: 0.047612786614103814
+  CANOLA: 0.019102851273335213
+  COPPER-micro: 0.012966199735653461
+  CORN: 0.03318845639934772
+  CRUDE_W_micro: 0.01292608104432206
+  DOW: 0.020303665789313734
+  EU-BANKS: 0.023104783247518784
+  EUR_micro: 0.015085268093502108
+  FTSECHINAA: 0.019229948985187414
+  GAS_US_mini: 0.01292608104432206
+  GOLD_micro: 0.016331921695599157
+  IRON: 0.01278186113444813
+  JPY_mini: 0.016331921695602315
+  KOSDAQ: 0.028003761656069714
+  KR10: 0.05168048101103365
+  MILLWHEAT: 0.05656578825541262
+  MUMMY: 0.027691855807877815
+  MXP: 0.023898682210508657
+  OAT: 0.08510713302555424
+  RUBBER: 0.012966199735653845
+  RUSSELL: 0.020303665789313734
+  SOYBEAN_mini: 0.019102851273335213
+  SUGAR11: 0.09455215901482907
+  US10U: 0.05168048101103862
+  V2X: 0.05896857681201084
+  VIX_mini: 0.023100806566898634
+
+# forecast weights 
+forecast_weights:
+  auto_weight_from_grouping:
+    parameters:
+      use_approx_DM: True
+      apply_forecast_post_ceiling_cost_SR_before_weighting: True
+    groups:
+      divergent:
+        weight: 0.75
+        momentum:
+          weight: 0.40
+          momentum8: 0.3
+          momentum16: 0.4
+          momentum32: 0.3
+        breakout:
+          weight: 0.333333333333
+          breakout20: 0.3
+          breakout80: 0.4
+          breakout160: 0.3
+        assettrend:
+          weight: 0.20
+          assettrend4: 0.3
+          assettrend8: 0.4
+          assettrend16: 0.3
+        accel:
+          weight: 0.066666666667
+          accel32: 1.0
+      convergent:
+        weight: 0.10
+        carry:
+          weight: 1.0
+          carry30: 1.0
+      relative:
+        weight: 0.15
+        relmomentum40: 1.0
+
+# from static estimation
+# estimate-prod-2025-11-21_150700.yaml
+
+forecast_scalars:
+  accel32: 5.527134204078692
+  assettrend16: 13.038044002794317
+  assettrend4: 27.704325416533823
+  assettrend8: 19.090274705390776
+  breakout160: 0.867830520201522
+  breakout20: 0.7890331870154135
+  breakout80: 0.8450583670714891
+  carry30: 34.704126416883014
+  momentum16: 5.000315900671909
+  momentum32: 3.3690349653047997
+  momentum8: 7.250138292731959
+  relmomentum40: 164.2400579539763
